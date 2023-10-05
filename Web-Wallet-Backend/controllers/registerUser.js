@@ -1,0 +1,73 @@
+const RegisterUser = require('../models/registerUser.model');
+const crypto = require('crypto');
+var bcrypt = require("bcryptjs");
+
+const createUser = async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+    var address = '0x' + crypto.randomBytes(16).toString('hex');
+    RegisterUser.create({
+      name: name,
+      email: email,
+      password:  bcrypt.hashSync(password, 8),
+      address: address
+    })
+      .then(result => {
+        return res.status(201).send(result);
+      });
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const id = req.params.id;
+    console.log(id);
+    RegisterUser.update({ name: name, email: email, password: password }, {
+      where: {
+        id: id
+      }
+    }).then(users => {
+      return res.status(201).send(users);
+      //res.send("User Updated", users);
+    })
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+const getRegisterUser = async (req, res) => {
+  try {
+    RegisterUser.findAll().then(users => {
+      res.send(users);
+    })
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+const getRegisterUserById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+    RegisterUser.findAll({
+      where: {
+        id: id
+      }
+    }).then(users => {
+      res.send(users);
+    })
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+
+module.exports = {
+  createUser,
+  getRegisterUser,
+  getRegisterUserById,
+  updateUser
+}
