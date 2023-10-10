@@ -8,8 +8,16 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const Cart = (props) => {
+
+  const navigate = useNavigate();
+
+  const goToSendFinal = () => {
+    // Use history.push to navigate to a specific route (e.g., '/component2')
+    navigate('/send');
+  };
 
   useEffect(()=>{
     console.log("Props", props.data);
@@ -40,7 +48,7 @@ const Cart = (props) => {
           }}
         >
           <img width="34" height="34" src={Boldplus} alt='svg'></img>
-          <img width="34" height="34" src={arrow} alt='svg'></img>
+          <img onClick={goToSendFinal} cursor= "pointer" width="34" height="34" src={arrow} alt='svg'></img>
           <img width="34" height="34" src={swap} alt='svg'></img>
         </Box>
         <Box >

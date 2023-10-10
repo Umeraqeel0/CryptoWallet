@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../util/db');
 
-const RegisterUser = sequelize.define('registerUser',{
+const RegisterUser = sequelize.define('registerUser', {
   id: {
-     type: Sequelize.INTEGER,
-     autoIncrement: true,
-     allowNull: false,
-     primaryKey: true
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
   },
   name: Sequelize.STRING,
-  email:{
+  email: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -18,7 +18,8 @@ const RegisterUser = sequelize.define('registerUser',{
     allowNull: false
   },
   address: {
-    type: Sequelize.STRING,
+    type: Sequelize.ARRAY( Sequelize.STRING ),
+    defaultValue: [],
     allowNull: false
   }
 })

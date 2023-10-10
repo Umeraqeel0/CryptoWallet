@@ -16,18 +16,24 @@ function Dashboard() {
 
   const location = useLocation();
   const [address, setAddress] = useState('');
-    const [balance, setBalance] = useState('');
+  const [balance, setBalance] = useState('');
+  const [getId, setId] = useState('');
+
 
   useEffect(() => {
 
     const fetchData = async () => {
-      const res = await AuthService.getRegisterUserById(location.state);
-      console.log("getRegisterUserById", res.data[0].address);
-      setAddress(res.data[0].address);
+      console.log("das", location.state);
+      setId(location.state.id);
+      const res = await AuthService.getRegisterUserById(getId, location.state.accessToken);
+      console.log("getRegisterUserById", res.data[0].address[0]);
+
+
+      setAddress(res.data[0].address[0]);
     }
 
     fetchData().catch(console.error);
-  },[address, location.state])
+  }, [address, location.state, getId])
 
   return (
     <>
@@ -35,7 +41,7 @@ function Dashboard() {
       <Container fixed>
         <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '120vh', flexGrow: 1 }}>
           <Nav />
-          <Cart data={address}/>
+          <Cart data={address} />
           <MetaTab />
         </Box>
       </Container>

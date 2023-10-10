@@ -1,6 +1,7 @@
 const RegisterUser = require('../models/registerUser.model');
 const crypto = require('crypto');
 var bcrypt = require("bcryptjs");
+const addArray = [];
 
 const createUser = async (req, res, next) => {
   try {
@@ -9,12 +10,40 @@ const createUser = async (req, res, next) => {
     RegisterUser.create({
       name: name,
       email: email,
-      password:  bcrypt.hashSync(password, 8),
-      address: address
+      password: bcrypt.hashSync(password, 8),
+      address: [address],
     })
       .then(result => {
         return res.status(201).send(result);
       });
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+const addAddress = async (req, res) => {
+
+  const id = req.params.id;
+  console.log(id);
+  var address = '0x' + crypto.randomBytes(16).toString('hex');
+  const data = await RegisterUser.findAll({
+    where: {
+      id: id
+    }
+  });
+  if(data == 0) {
+    return res.status(201).send("Invalid Id");
+  }
+  const prevAdd = data[0].dataValues.address;
+  prevAdd.push(address);
+  try {
+    RegisterUser.update({ address: prevAdd }, {
+      where: {
+        id: id
+      }
+    }).then(users => {
+      return res.status(201).send("Address added");
+    })
   } catch (error) {
     return res.status(error.status || 500).json({ message: error.message });
   }
@@ -69,5 +98,6 @@ module.exports = {
   createUser,
   getRegisterUser,
   getRegisterUserById,
-  updateUser
+  updateUser,
+  addAddress
 }

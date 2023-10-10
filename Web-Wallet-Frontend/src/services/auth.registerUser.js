@@ -22,9 +22,14 @@ class AuthService {
     });
   }
 
-  getRegisterUserById(id) {
-    console.log("fihirst", id);
-    return axios.get(API_URL + "getRegisterUserById/"+ id)
+  getRegisterUserById(id, accessToken) {
+    console.log("ID", id);
+    console.log("ID", accessToken);
+    return axios.get(API_URL + "getRegisterUserById/"+ id, {
+      headers: {
+        'Authorization': `${accessToken}`
+      }
+    })
   };
 
   getCurrentUser() {

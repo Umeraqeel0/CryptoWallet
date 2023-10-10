@@ -16,8 +16,8 @@ const Login = () => {
 
     useEffect(() => {
         userRef.current.focus();
-    
-    },[])
+
+    }, [])
 
     useEffect(() => {
         setErrMsg('');
@@ -29,31 +29,31 @@ const Login = () => {
         try {
             console.log(user, pwd)
             const res = await AuthService.login(user, pwd);
-            console.log("Res",res);
+            console.log("Res", res);
             toast.success("Successfull!", {
                 autoClose: 20000,
             });
-            navigate("/dashboard", { state: res.data.id});
+            navigate("/dashboard", { state: res.data });
         } catch (err) {
             if (!err?.response) {
                 toast.error("Error No Server Response!", {
                     autoClose: 20000,
                 });
 
-                setErrMsg("No Server Response");
+
             } else if (err.response?.status === 409) {
                 toast.error("Error Email Taken!", {
                     autoClose: 20000,
                 });
             } else {
-                toast.error("Error Registration Failed!", {
+                toast.error("Invalid Username or Password!", {
                     autoClose: 20000,
                 });
             }
             errRef.current.focus();
         }
     }
-    
+
     return (
         <>
             <section>
