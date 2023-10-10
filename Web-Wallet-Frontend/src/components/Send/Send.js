@@ -22,16 +22,16 @@ const Send = () => {
         <div className="App">
             <Header />
             <Container fixed>
-                <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '110vh', flexGrow: 1 }}>
+                <Box sx={{ bgcolor: '#1b1e22', height: '80vh', width: '90vh', flexGrow: 1 }}>
                     <Nav />
 
-                    <div style={{ marginLeft: '100px', marginTop: '15px' }}>
-                        <Box sx={{ bgcolor: '#282c34', height: '50vh', width: '70vh', flexGrow: 1, }}>
-                            <div class="page-container__header send__header" data-testid="page-container__header"><div class="page-container__title">Send to</div>
+                    <div style={{ marginLeft: '190px', marginTop: '15px' }}>
+                        <Box sx={{ bgcolor: '#282c34', height: '70vh', width: '50vh', flexGrow: 1, }}>
+                            <div style={{marginLeft: '20px'}} class="page-container__header send__header" data-testid="page-container__header"><div class="page-container__title">Send to</div>
                                 <a onClick={goToDashboard} class="button btn-link page-container__header-close-text" role="button" tabindex="0">Cancel</a></div>
                             <div class="ens-input send__to-row"><div class="ens-input__wrapper">
 
-                                <div style={{ marginLeft: '130px', marginTop: '15px' }}>
+                                <div style={{ marginLeft: '30px', marginTop: '15px' }}>
 
                                     <input class="ens-input__wrapper__input" type="text" dir="auto" placeholder="Enter public address" spellcheck="false" data-testid="ens-input" value=""></input>
                                 </div>

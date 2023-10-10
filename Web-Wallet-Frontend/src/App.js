@@ -21,7 +21,7 @@ function App() {
           <Route path="forgotPassword" element={<ForgotPassword />} />
           <Route path="dashboard" element={<Dashboard/>} />
 
-          <Route path="/send" element={<Send />} />
+          <Route path="send" element={<Send />} />
           <Route path="sendTo" element={<SendTo />} />
           <Route path="sendFinal" element={<SendFinal />} />
 

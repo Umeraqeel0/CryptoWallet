@@ -14,6 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import AppBar from '@mui/material/AppBar';
+import Modal from 'react-bootstrap/Modal';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -58,8 +59,11 @@ const StyledMenu = styled((props) => (
 
 const Nav = (props) => {
 
+
+    const [show1, setShow1] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [getOn, setOn] = React.useState(null);
+
     const open = Boolean(anchorEl);
     const openDot = Boolean(getOn);
 
@@ -76,6 +80,11 @@ const Nav = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleClose1 = () => setShow1(false);
+    const handleShow1 = () => setShow1(true);
+
+
     const options = [
         'Ganymede',
         'Hangouts Call',
@@ -86,10 +95,23 @@ const Nav = (props) => {
     const ITEM_HEIGHT = 48;
     return (
         <AppBar sx={{ bgcolor: '#282c34' }} position="static">
+
+          
             <Toolbar>
+                <Button sx={{ bgcolor: '#1b1e22' }}
+                    variant="contained"
+                    onClick={handleClick}
+                    endIcon={<KeyboardArrowDownIcon />}
+                >
+                    Networks
+                </Button>
+
+
+
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     <div>
-                        <Button style={{marginLeft:"30px"}} sx={{ bgcolor: '#282c34' }}
+
+                        <Button style={{ marginLeft: "-90px" }} sx={{ bgcolor: '#282c34' }}
                             id="demo-customized-button"
                             aria-controls={open ? 'demo-customized-menu' : undefined}
                             aria-haspopup="true"
@@ -99,7 +121,7 @@ const Nav = (props) => {
                             onClick={handleClick}
                             endIcon={<KeyboardArrowDownIcon />}
                         >
-                            Accounts
+                            <b>Accounts</b>
                         </Button>
                         <StyledMenu
                             id="demo-customized-menu"
@@ -112,16 +134,16 @@ const Nav = (props) => {
                         >
                             <MenuItem onClick={handleClose} disableRipple>
                                 <EditIcon />
-                                Edit
+                                Account 1
                             </MenuItem>
                             <MenuItem onClick={handleClose} disableRipple>
                                 <FileCopyIcon />
-                                Duplicate
+                                Account 2
                             </MenuItem>
                             <Divider sx={{ my: 0.5 }} />
                             <MenuItem onClick={handleClose} disableRipple>
                                 <ArchiveIcon />
-                                Archive
+                                Add Account
                             </MenuItem>
                             <MenuItem onClick={handleClose} disableRipple>
                                 <MoreHorizIcon />
@@ -130,36 +152,36 @@ const Nav = (props) => {
                         </StyledMenu>
                     </div>
                 </Typography>
-                    <IconButton sx={{ color: 'white' }}
-                        aria-label="more"
-                        id="long-button"
-                        aria-controls={openDot ? 'long-menu' : undefined}
-                        aria-expanded={openDot ? 'true' : undefined}
-                        onClick={handleClickDot}
-                    >
-                        <MoreVertIcon />
-                    </IconButton>
-                    <Menu
-                        id="long-menu"
-                        MenuListProps={{
-                            'aria-labelledby': 'long-button',
-                        }}
-                        anchorEl={getOn}
-                        open={openDot}
-                        onClose={handleCloseDot}
-                        PaperProps={{
-                            style: {
-                                maxHeight: ITEM_HEIGHT * 4.5,
-                                width: '20ch',
-                            },
-                        }}
-                    >
-                        {options.map((option) => (
-                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleCloseDot}>
-                                {option}
-                            </MenuItem>
-                        ))}
-                    </Menu>
+                <IconButton sx={{ color: 'white' }}
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={openDot ? 'long-menu' : undefined}
+                    aria-expanded={openDot ? 'true' : undefined}
+                    onClick={handleClickDot}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+                <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                        'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={getOn}
+                    open={openDot}
+                    onClose={handleCloseDot}
+                    PaperProps={{
+                        style: {
+                            maxHeight: ITEM_HEIGHT * 4.5,
+                            width: '20ch',
+                        },
+                    }}
+                >
+                    {options.map((option) => (
+                        <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleCloseDot}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Menu>
             </Toolbar>
         </AppBar>
 
