@@ -9,6 +9,8 @@ router.post('/updateUser/:id', registerUser.updateUser);
 router.post('/addAddress/:id', registerUser.addAddress);
 router.get('/getRegisterUser', [authJwt.verifyToken], registerUser.getRegisterUser);
 router.get('/getRegisterUserById/:id', [authJwt.verifyToken],registerUser.getRegisterUserById);
+router.get('/getRegisterUserByAddress/:address',registerUser.getRegisterUserByAddress);
+router.post('/updateBalanceByAddress/:address',registerUser.updateBalance);
 
 module.exports = router;
 

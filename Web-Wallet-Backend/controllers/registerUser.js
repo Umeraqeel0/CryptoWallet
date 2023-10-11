@@ -12,6 +12,7 @@ const createUser = async (req, res, next) => {
       email: email,
       password: bcrypt.hashSync(password, 8),
       address: [address],
+      balance: 0
     })
       .then(result => {
         return res.status(201).send(result);
@@ -67,6 +68,24 @@ const updateUser = async (req, res) => {
   }
 };
 
+const updateBalance = async (req, res) => {
+  try {
+    const { balance } = req.body;
+    const address = req.params.address;
+    console.log(balance, address);
+    RegisterUser.update({ balance: balance }, {
+      where: {
+        address: [address]
+      }
+    }).then(users => {
+      return res.status(201).send(users);
+      //res.send("User Updated", users);
+    })
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 const getRegisterUser = async (req, res) => {
   try {
     RegisterUser.findAll().then(users => {
@@ -93,11 +112,32 @@ const getRegisterUserById = async (req, res) => {
   }
 };
 
+const getRegisterUserByAddress = async (req, res) => {
+  try {
+    const address = req.params.address;
+    console.log(address);
+    RegisterUser.findAll({
+      where: {
+        address: [address]
+      }
+    }).then(users => {
+      console.log(users);
+      res.send(users);
+    })
+    console.log("1")
+  } catch (error) {
+    console.log("2")
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 
 module.exports = {
   createUser,
   getRegisterUser,
   getRegisterUserById,
+  getRegisterUserByAddress,
   updateUser,
+  updateBalance,
   addAddress
 }

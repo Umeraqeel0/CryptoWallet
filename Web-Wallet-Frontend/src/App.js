@@ -9,7 +9,11 @@ import Send from "./components/Send/Send";
 import SendTo from "./components/Send/SendTo";
 import Settings from "./components/Settings /Settings";
 import SendFinal from './components/Send/SendFinal';
+<<<<<<< Updated upstream
 import Notifications from "./components/Notifications/Notifications";
+=======
+import Buy from './components/Buy/Buy';
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -25,6 +29,7 @@ function App() {
           <Route path="send" element={<Send />} />
           <Route path="sendTo" element={<SendTo />} />
           <Route path="sendFinal" element={<SendFinal />} />
+          <Route path="buy" element={<Buy />} />
 
           <Route path="settings" element={<Settings />} />
           <Route path="notifications" element={<Notifications />} />

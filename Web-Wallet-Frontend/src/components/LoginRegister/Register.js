@@ -25,6 +25,7 @@ const Register = () => {
     const [userSuccess, setUserSuccess] = useState(true);
 
     const [name, setName] = useState("");
+    const [balance, setBalance] = useState(0);
 
     const [pwd, setPwd] = useState("");
     const [validPwd, setValidPwd] = useState(false);
@@ -68,10 +69,11 @@ const Register = () => {
             return;
         }
         try {
-            await AuthService.register(name, user, pwd).then((response) => {
+            await AuthService.register(name, user, pwd, balance).then((response) => {
                 setSuccess(true);
                 setEmail("");
                 setName("");
+                setBalance("0");
                 setPwd("");
                 setMatchPwd("");
                 console.log(response);
@@ -93,7 +95,7 @@ const Register = () => {
                     autoClose: 20000,
                 });
             } else {
-                toast.error("Error Registration Failed!", {
+                toast.error("Email or Username Already Used!", {
                     autoClose: 20000,
                 });
             }

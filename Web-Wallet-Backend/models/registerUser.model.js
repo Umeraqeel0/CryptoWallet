@@ -21,7 +21,11 @@ const RegisterUser = sequelize.define('registerUser', {
     type: Sequelize.ARRAY( Sequelize.STRING ),
     defaultValue: [],
     allowNull: false
-  }
+  },
+  balance: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
 })
 
 module.exports = RegisterUser;

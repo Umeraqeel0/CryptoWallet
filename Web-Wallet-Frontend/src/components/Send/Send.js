@@ -1,22 +1,41 @@
 import Header from '../Header/Header';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import MetaTab from '../Tabs/Tab';
 import Nav from '../Nav/Nav';
-import Cart from '../Cart/Cart';
 import send from './send.css'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SendTo from "./SendTo";
+import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const Send = () => {
+const Send = (props) => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(()=>{
+
+        console.log("Send", location.state);
+      },[location.state]);
+
 
     const goToDashboard = () => {
         // Use history.push to navigate to a specific route (e.g., '/component2')
         navigate('/dashboard');
     };
+
+    function PartiallyHiddenText({ text, visibleChars }) {
+        if(text){
+            const truncatedText = text.substring(0, visibleChars);
+            const ellipsis = text.length > visibleChars ? '...' : '';
+          
+            return (
+              <span className="partially-hidden-text">
+                {truncatedText}{ellipsis}
+              </span>
+            );
+        }
+      }
 
     return (
         <div className="App">
@@ -44,7 +63,7 @@ const Send = () => {
                                     <Link to='/sendTo'>
                                         <div class="box send__select-recipient-wrapper__group-item box--padding-4 box--flex-direction-row">
                                             <div><svg x="0" y="0" width="28" height="28"><rect x="0" y="0" width="28" height="28" transform="translate(8.664006925057517 0.5521327237109247) rotate(35.9 14 14)" fill="#FAAB00"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-3.5820380599961976 -13.625432760794109) rotate(370.9 14 14)" fill="#F2D202"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-24.48820639857301 7.071976417273904) rotate(264.6 14 14)" fill="#186BF2"></rect></svg></div>
-                                            <div class="box send__select-recipient-wrapper__group-item__content box--flex-direction-row" data-testid="recipient"><p class="box mm-text send__select-recipient-wrapper__group-item__title mm-text--body-lg-medium box--flex-direction-row box--color-text-default">Account 1</p><p class="box mm-text send__select-recipient-wrapper__group-item__subtitle mm-text--body-md box--flex-direction-row box--color-text-alternative">0xe2b5...2d7b</p></div>
+                                            <div class="box send__select-recipient-wrapper__group-item__content box--flex-direction-row" data-testid="recipient"><p class="box mm-text send__select-recipient-wrapper__group-item__title mm-text--body-lg-medium box--flex-direction-row box--color-text-default">Account 1</p><p class="box mm-text send__select-recipient-wrapper__group-item__subtitle mm-text--body-md box--flex-direction-row box--color-text-alternative"><PartiallyHiddenText text={location.state} visibleChars={9} /></p></div>
                                         </div>
                                     </Link>
 

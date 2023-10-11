@@ -16,7 +16,6 @@ function Dashboard() {
 
   const location = useLocation();
   const [address, setAddress] = useState('');
-  const [balance, setBalance] = useState('');
   const [getId, setId] = useState('');
 
 
@@ -27,7 +26,6 @@ function Dashboard() {
       setId(location.state.id);
       const res = await AuthService.getRegisterUserById(getId, location.state.accessToken);
       console.log("getRegisterUserById", res.data[0].address[0]);
-
 
       setAddress(res.data[0].address[0]);
     }
