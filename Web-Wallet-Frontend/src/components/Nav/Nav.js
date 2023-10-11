@@ -86,8 +86,8 @@ const Nav = (props) => {
 
 
     const options = [
-        'Ganymede',
-        'Hangouts Call',
+        'Settings',
+        'Notifications',
         'Luna',
         'Oberon'
     ];

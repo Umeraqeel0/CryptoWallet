@@ -9,6 +9,7 @@ import Send from "./components/Send/Send";
 import SendTo from "./components/Send/SendTo";
 import Settings from "./components/Settings /Settings";
 import SendFinal from './components/Send/SendFinal';
+import Notifications from "./components/Notifications/Notifications";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="sendFinal" element={<SendFinal />} />
 
           <Route path="settings" element={<Settings />} />
+          <Route path="notifications" element={<Notifications />} />
 
         </Routes>
       </Router>
