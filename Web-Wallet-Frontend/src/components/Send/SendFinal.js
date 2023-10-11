@@ -14,12 +14,10 @@ const SendFinal =(props) =>{
         <div className="App">
       <Header />
       <Container fixed>
-      <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '110vh', flexGrow: 1 }}>
             <Nav />
 
             <SendDetailsFinal></SendDetailsFinal>
             
-        </Box>
       </Container>
     </div>
     )

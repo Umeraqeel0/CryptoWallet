@@ -15,6 +15,7 @@ import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Modal from 'react-bootstrap/Modal';
+import { Link } from 'react-router-dom';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -69,6 +70,7 @@ const Nav = (props) => {
 
     const handleClickDot = (event) => {
         setOn(event.currentTarget);
+        console.log("des",event.currentTarget)
     };
     const handleCloseDot = () => {
         setOn(null);
@@ -86,17 +88,15 @@ const Nav = (props) => {
 
 
     const options = [
-        'Settings',
-        'Notifications',
-        'Luna',
-        'Oberon'
+        <Link to='/settings'>
+            <h5 style={{ color: 'black' }}>Settings
+            </h5>
+        </Link>
     ];
 
     const ITEM_HEIGHT = 48;
     return (
         <AppBar sx={{ bgcolor: '#282c34' }} position="static">
-
-          
             <Toolbar>
                 <Button sx={{ bgcolor: '#1b1e22' }}
                     variant="contained"

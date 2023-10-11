@@ -9,11 +9,9 @@ import Send from "./components/Send/Send";
 import SendTo from "./components/Send/SendTo";
 import Settings from "./components/Settings /Settings";
 import SendFinal from './components/Send/SendFinal';
-<<<<<<< Updated upstream
 import Notifications from "./components/Notifications/Notifications";
-=======
 import Buy from './components/Buy/Buy';
->>>>>>> Stashed changes
+
 
 function App() {
   return (
