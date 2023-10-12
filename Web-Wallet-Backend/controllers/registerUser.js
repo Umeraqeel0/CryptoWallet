@@ -1,4 +1,5 @@
 const RegisterUser = require('../models/registerUser.model');
+const Addresses = require('../models/registerUser.model');
 const crypto = require('crypto');
 var bcrypt = require("bcryptjs");
 const addArray = [];
@@ -7,16 +8,16 @@ const createUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     var address = '0x' + crypto.randomBytes(16).toString('hex');
-    RegisterUser.create({
+    const data = await RegisterUser.create({
       name: name,
       email: email,
-      password: bcrypt.hashSync(password, 8),
-      address: [address],
+      password: bcrypt.hashSync(password, 8)
+    });
+    const data1 = await Addresses.create({
+      address:address,
       balance: 0
-    })
-      .then(result => {
-        return res.status(201).send(result);
-      });
+    });
+    return res.status(201).send(data,data1);
   } catch (error) {
     return res.status(error.status || 500).json({ message: error.message });
   }

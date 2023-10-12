@@ -18,7 +18,7 @@ export default function FormDialog() {
     const [balance, setBalance] = React.useState('');
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setOpen(false);
     };
 
     const handleClose = async (e) => {
@@ -33,7 +33,7 @@ export default function FormDialog() {
     };
 
     return (
-        <div>
+        <div >
             <Dialog style={{ color: "#1098fc" }} open={open} onClose={handleClose}>
                 <DialogTitle sx={{ flexGrow: 1 }} style={{ color: "#1098fc" }} >Buy Eth</DialogTitle>
                 <DialogContent style={{ color: "#1098fc" }} >

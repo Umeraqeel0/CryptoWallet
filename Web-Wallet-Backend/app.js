@@ -5,24 +5,22 @@ const session = require('express-session');
 const app = express();
 const registerUser = require('./routes/registerUser');
 const authRoutes = require('./routes/auth');
+const db = require('./models');
 const cors = require("cors");
-const sequelize = require('./util/db');
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(session({secret: 'my secret', resave: false, saveUninitialized: false}));
+app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false }));
 app.use(cors());
 
 app.use('/admin', registerUser);
 app.use('/admin', authRoutes);
 
-sequelize.sync().then(result => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-  });
-}).catch(err => {
-  console.log(err);
-})
+db.sequelize.sync({force: true});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 

@@ -17,7 +17,7 @@ function ResetPassword() {
     return (
         <>
 
-            <section>
+            <section style={{backgroundColor: "#282c34"}}>
                 <h1>Reset Password</h1>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="emial">New Password:</label>

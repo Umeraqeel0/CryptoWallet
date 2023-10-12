@@ -9,29 +9,28 @@ import { useEffect } from 'react';
 import AuthService from "../services/auth.registerUser";
 import '../App.css';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { addUserAddress, addUserId} from '../store/slices/UserSlices';
 
 function Dashboard() {
 
+  const dispatch = useDispatch()
+
   const location = useLocation();
-  const [address, setAddress] = useState('');
-  const [getId, setId] = useState('');
 
 
   useEffect(() => {
 
     const fetchData = async () => {
       console.log("das", location.state);
-      setId(location.state.id);
-      const res = await AuthService.getRegisterUserById(getId, location.state.accessToken);
+      const res = await AuthService.getRegisterUserById(location.state.id, location.state.accessToken);
       console.log("getRegisterUserById", res.data[0].address[0]);
-
-      setAddress(res.data[0].address[0]);
+      dispatch(addUserAddress(res.data[0].address[0]));
+      dispatch(addUserId(location.state.id));
     }
 
     fetchData().catch(console.error);
-  }, [address, location.state, getId])
+  }, [location.state, dispatch])
 
   return (
     <>
@@ -39,7 +38,7 @@ function Dashboard() {
       <Container fixed>
         <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '120vh', flexGrow: 1 }}>
           <Nav />
-          <Cart data={address} />
+          <Cart/>
           <MetaTab />
         </Box>
       </Container>

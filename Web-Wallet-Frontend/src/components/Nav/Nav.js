@@ -14,8 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import AppBar from '@mui/material/AppBar';
-import Modal from 'react-bootstrap/Modal';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -60,6 +59,7 @@ const StyledMenu = styled((props) => (
 
 const Nav = (props) => {
 
+    const navigate = useNavigate();
 
     const [show1, setShow1] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -70,8 +70,9 @@ const Nav = (props) => {
 
     const handleClickDot = (event) => {
         setOn(event.currentTarget);
-        console.log("des",event.currentTarget)
     };
+
+
     const handleCloseDot = () => {
         setOn(null);
     };
@@ -87,12 +88,10 @@ const Nav = (props) => {
     const handleShow1 = () => setShow1(true);
 
 
-    const options = [
-        <Link to='/settings'>
-            <h5 style={{ color: 'black' }}>Settings
-            </h5>
-        </Link>
-    ];
+    const onClickSetting = () => {
+        navigate("/settings");
+    }
+        
 
     const ITEM_HEIGHT = 48;
     return (
@@ -105,9 +104,6 @@ const Nav = (props) => {
                 >
                     Networks
                 </Button>
-
-
-
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     <div>
 
@@ -157,31 +153,34 @@ const Nav = (props) => {
                     id="long-button"
                     aria-controls={openDot ? 'long-menu' : undefined}
                     aria-expanded={openDot ? 'true' : undefined}
-                    onClick={handleClickDot}
+                    onClick={handleClick}
                 >
                     <MoreVertIcon />
                 </IconButton>
-                <Menu
-                    id="long-menu"
+                <StyledMenu
+                    id="demo-customized-menu"
                     MenuListProps={{
-                        'aria-labelledby': 'long-button',
+                        'aria-labelledby': 'demo-customized-button',
                     }}
-                    anchorEl={getOn}
-                    open={openDot}
-                    onClose={handleCloseDot}
-                    PaperProps={{
-                        style: {
-                            maxHeight: ITEM_HEIGHT * 4.5,
-                            width: '20ch',
-                        },
-                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
                 >
-                    {options.map((option) => (
-                        <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleCloseDot}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Menu>
+                    <MenuItem onClick={onClickSetting} disableRipple>
+                        Setting
+                    </MenuItem>
+                    <MenuItem onClick={handleClose} disableRipple>
+                        Account Details
+                    </MenuItem>
+                    <MenuItem onClick={handleClose} disableRipple>
+                        Notifications
+                    </MenuItem>
+                    <Divider sx={{ my: 0.5 }} />
+                   
+                    <MenuItem onClick={handleClose} disableRipple>
+                        More
+                    </MenuItem>
+                </StyledMenu>
             </Toolbar>
         </AppBar>
 

@@ -10,9 +10,12 @@ import Stack from '@mui/material/Stack';
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import addDetails from "../../services/addDetails";
-
+import { useSelector, useDispatch } from 'react-redux'
 
 const Cart = (props) => {
+  const address = useSelector((state) => state.user.value)
+  const id = useSelector((state) => state.user.id)
+  
  const [balance, setBalance] = React.useState('');
   
   const navigate = useNavigate();
@@ -21,11 +24,11 @@ const Cart = (props) => {
     // Use history.push to navigate to a specific route (e.g., '/component2')
     
     console.log("S",props.data);
-    navigate('/send',{state: props.data});
+    navigate('/send');
   };
 
   const goToBuy = () => {
-    navigate('/buy', {state: props.data});
+    navigate('/buy');
   };
 
   useEffect(()=>{
@@ -41,19 +44,25 @@ const Cart = (props) => {
   },[props.data, balance]);
   
   function PartiallyHiddenText({ text, visibleChars }) {
-    const truncatedText = text.substring(0, visibleChars);
-    const ellipsis = text.length > visibleChars ? '...' : '';
-  
-    return (
-      <span className="partially-hidden-text">
-        {truncatedText}{ellipsis}
-      </span>
-    );
+    console.log("hi",text);
+    if(text){
+      const truncatedText = text.substring(0, visibleChars);
+      const ellipsis = text.length > visibleChars ? '...' : '';
+    
+      return (
+        <span className="partially-hidden-text">
+          {truncatedText}{ellipsis}
+        </span>
+      );
+    }
   }
 
+  console.log("selec",address)
+
+  console.log("selec-id",id)
   return (
     <>
-      <Button style={{marginTop: "15px", background: "#1b1e22", color: "#1098fc"}} centered variant="contained">  <PartiallyHiddenText text={props.data} visibleChars={6} />&nbsp;&nbsp; <FileCopyIcon /></Button>
+      <Button style={{marginTop: "15px", background: "#1b1e22", color: "#1098fc"}} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; <FileCopyIcon /></Button>
       <h1 style={{ color: "white", marginLeft: "-20px" }}>{balance} ETH</h1>
       <h4 style={{ color: "#a8aaad", marginLeft: "-20px" }}>$5.00 USD</h4>
       <div style={{ marginTop: "30px", marginLeft: "-15px" }}>

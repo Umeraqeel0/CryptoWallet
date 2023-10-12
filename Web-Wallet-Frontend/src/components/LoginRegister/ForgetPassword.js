@@ -23,7 +23,7 @@ function ForgotPassword() {
     return (
         <>
 
-            <section>
+            <section style={{backgroundColor: "#282c34"}}>
                 <h1>Forgot Password ?</h1>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="email">Email:</label>

@@ -56,7 +56,7 @@ const Login = () => {
 
     return (
         <>
-            <section>
+            <section style={{backgroundColor: "#282c34"}}>
                 <Toaster />
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <h1>Sign In</h1>

@@ -1,17 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
-const RegisterUser = sequelize.define('registerUsers', {
+const UserTransaction = sequelize.define('userTransactions', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  name: Sequelize.STRING,
-  email: {
+  sendTo: Sequelize.STRING,
+  from: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  password: {
+  eth: {
     type: Sequelize.STRING,
     allowNull: false
   }

@@ -105,7 +105,7 @@ const Register = () => {
 
     return (
         <>
-            <section>
+            <section style={{backgroundColor: "#282c34"}}>
                 <Toaster />
                 <p
                     ref={errRef}
