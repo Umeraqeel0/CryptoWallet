@@ -26,4 +26,7 @@ db.registerUser = require("../models/registerUser.model.js")(sequelize, Sequeliz
 db.userTransaction = require("./userTransaction.model.js")(sequelize, Sequelize);
 db.userAddresses = require("../models/userAddresses.model.js")(sequelize, Sequelize);
 
+db.registerUser.hasMany(db.userAddresses);
+db.userAddresses.belongsTo(db.registerUser);
+
 module.exports = db;

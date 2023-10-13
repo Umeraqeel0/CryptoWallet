@@ -1,4 +1,5 @@
-const RegisterUser = require('../models/registerUser.model');
+const db = require("../models");
+const RegisterUser = db.registerUser;
 
 const checkDuplicateUsernameOrEmail = async (req, res, next) => {
     const { name, email } = req.body;

@@ -1,5 +1,6 @@
-const RegisterUser = require('../models/registerUser.model');
-const Addresses = require('../models/registerUser.model');
+const db = require("../models");
+const RegisterUser = db.registerUser;
+const Addresses = db.userAddresses;
 const crypto = require('crypto');
 var bcrypt = require("bcryptjs");
 const addArray = [];
@@ -14,10 +15,14 @@ const createUser = async (req, res, next) => {
       password: bcrypt.hashSync(password, 8)
     });
     const data1 = await Addresses.create({
+      registerUserId: data.dataValues.id,
       address:address,
       balance: 0
     });
-    return res.status(201).send(data,data1);
+    if(data && data1){
+      return res.status(201).send(data);
+    }
+    
   } catch (error) {
     return res.status(error.status || 500).json({ message: error.message });
   }
