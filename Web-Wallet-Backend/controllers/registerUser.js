@@ -10,8 +10,8 @@ const createUser = async (req, res, next) => {
     const { name, email, password } = req.body;
     var address = '0x' + crypto.randomBytes(16).toString('hex');
     const data = await RegisterUser.create({
-      name: name,
-      email: email,
+      name: name.toLowerCase(),
+      email: email.toLowerCase(),
       password: bcrypt.hashSync(password, 8)
     });
     const data1 = await Addresses.create({

@@ -8,7 +8,7 @@ const postLogin = async (req, res) => {
     try {
         RegisterUser.findOne({
             where: {
-                email: req.body.email,
+                email: req.body.email.toLowerCase(),
             },
         }).then((user) => {
             console.log(user);
