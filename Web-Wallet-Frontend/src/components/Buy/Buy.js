@@ -8,9 +8,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import addDetails from '../../services/addDetails';
+import addDetails from '../../services/userDetails';
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function FormDialog() {
+    const address = useSelector((state) => state.user.value)
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -24,9 +27,9 @@ export default function FormDialog() {
     const handleClose = async (e) => {
         console.log("val", balance);
         console.log("buy", location.state)
-        const res = await addDetails.updateBalanceByAddress(location.state, balance);
-        if(res){
-            navigate("/dashboard", { state: res.data });
+        const res = await addDetails.updateBalanceByAddress(address, balance);
+        if (res) {
+            navigate("/dashboard");
         }
         setOpen(false);
         navigate('/dashboard');

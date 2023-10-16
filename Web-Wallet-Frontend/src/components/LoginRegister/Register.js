@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "../../App.css";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,6 +9,7 @@ import {
     faTimes,
     faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AuthService from "../../services/auth.registerUser";
 
@@ -16,6 +17,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{8,24}$/;
 
 const Register = () => {
+    const navigate = useNavigate()
     const userRef = useRef();
     const errRef = useRef();
 
@@ -83,6 +85,10 @@ const Register = () => {
             toast.success("Successfully signed up. Please login.", {
                 autoClose: 30000,
             });
+            setTimeout(() => {
+                navigate('/login');
+            }, 1000);
+
         } catch (err) {
             if (!err?.response) {
                 toast.error("Error No Server Response!", {
@@ -105,7 +111,7 @@ const Register = () => {
 
     return (
         <>
-            <section style={{backgroundColor: "#282c34"}}>
+            <section style={{ backgroundColor: "#282c34" }}>
                 <Toaster />
                 <p
                     ref={errRef}
@@ -236,7 +242,7 @@ const Register = () => {
                     Already registered?
                     <br />
                     <Link to="/login"> Sign In</Link>
-                   
+
                 </p>
             </section>
         </>

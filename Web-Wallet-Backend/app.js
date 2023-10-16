@@ -5,6 +5,9 @@ const session = require('express-session');
 const app = express();
 const registerUser = require('./routes/registerUser');
 const authRoutes = require('./routes/auth');
+const userAccounts = require('./routes/userAccounts');
+const sendTx = require('./routes/sendTx');
+
 const db = require('./models');
 const cors = require("cors");
 const PORT = 3001;
@@ -17,6 +20,8 @@ app.use(cors());
 
 app.use('/admin', registerUser);
 app.use('/admin', authRoutes);
+app.use('/admin', userAccounts);
+app.use('/admin', sendTx);
 
 db.sequelize.sync();
 

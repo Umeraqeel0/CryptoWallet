@@ -9,11 +9,14 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import addDetails from "../../services/addDetails";
+import addDetails from "../../services/userDetails";
 import { useSelector, useDispatch } from 'react-redux'
+import { addUserBalance } from '../../store/slices/UserSlices';
 
 const Cart = (props) => {
+  const dispatch = useDispatch()
   const address = useSelector((state) => state.user.value)
+  const bal = useSelector((state) => state.user.bal)
   const id = useSelector((state) => state.user.id)
   
  const [balance, setBalance] = React.useState('');
@@ -22,8 +25,6 @@ const Cart = (props) => {
 
   const goToSendFinal = () => {
     // Use history.push to navigate to a specific route (e.g., '/component2')
-    
-    console.log("S",props.data);
     navigate('/send');
   };
 
@@ -33,15 +34,15 @@ const Cart = (props) => {
 
   useEffect(()=>{
     const fetchData = async () => {
-      const res = await addDetails.getRegisterUserByAddress(props.data)
+      const res = await addDetails.getUserBalanceByAddress(address)
       console.log("getRegisterUserByAddress",res.data[0].balance);
-      setBalance(res.data[0].balance);
+      dispatch(addUserBalance(res.data[0].balance));
     }
 
     fetchData().catch(console.error);
   
 
-  },[props.data, balance]);
+  },[props.data, bal]);
   
   function PartiallyHiddenText({ text, visibleChars }) {
     console.log("hi",text);
@@ -63,7 +64,7 @@ const Cart = (props) => {
   return (
     <>
       <Button style={{marginTop: "15px", background: "#1b1e22", color: "#1098fc"}} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; <FileCopyIcon /></Button>
-      <h1 style={{ color: "white", marginLeft: "-20px" }}>{balance} ETH</h1>
+      <h1 style={{ color: "white", marginLeft: "-20px" }}>{bal} ETH</h1>
       <h4 style={{ color: "#a8aaad", marginLeft: "-20px" }}>$5.00 USD</h4>
       <div style={{ marginTop: "30px", marginLeft: "-15px" }}>
         <Box

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   value: 0,
   id: 0,
+  bal: 0
 }
 const userSlices = createSlice({
   name: 'user',
@@ -18,6 +19,11 @@ const userSlices = createSlice({
       // immutable state based off those changes
       state.value = action.payload
     },
+    addUserBalance: (state,action) => {
+      state.bal = action.payload
+    },
+    
+
     // addUserAddress(state, action) {
     //   console.log("first-redux")
     //   state.push(action.payload);
@@ -27,4 +33,4 @@ const userSlices = createSlice({
 })
 
 export default userSlices.reducer;
-export const { addUserId, addUserAddress } = userSlices.actions; 
+export const { addUserId, addUserAddress, addUserBalance } = userSlices.actions; 
