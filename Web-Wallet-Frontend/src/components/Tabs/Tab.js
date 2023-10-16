@@ -8,7 +8,7 @@ import plusMath from '../../assets/plus-math.png';
 import refresh from '../../assets/refresh.svg';
 import help from '../../assets/help.png';
 import metaSvg from '../../assets/no-nfts.svg';
-
+import Activity from './Activity';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -100,8 +100,11 @@ const MetaTab = (props) => {
                 </div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <text style={{ color: '#a8aaad' }}>You have no transactions</text>
+
+            <Activity></Activity>
+                {/* <text style={{ color: '#a8aaad' }}>You have no transactions</text> */}
                 <br></br><br></br> <br></br><br></br><br></br> <br></br><br></br><br></br>
+               
                 <div align="left" style={{ marginTop: "20px" }}>
                     <img width="13" height="13" src={plusMath} alt='svg'></img>
                     <text style={{ color: '#1098fc', textAlign: "left" }}> Import NFTs</text>

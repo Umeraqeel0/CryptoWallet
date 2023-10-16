@@ -1,41 +1,32 @@
 import Header from '../Header/Header';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import MetaTab from '../Tabs/Tab';
 import Nav from '../Nav/Nav';
+import Cart from '../Cart/Cart';
 import send from './send.css'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import SendTo from "./SendTo";
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import round from '../../assets/round.png'
 
-const Send = (props) => {
+
+const Send = () => {
 
     const navigate = useNavigate();
-    const location = useLocation();
-
-    useEffect(()=>{
-
-        console.log("Send", location.state);
-      },[location.state]);
-
 
     const goToDashboard = () => {
         // Use history.push to navigate to a specific route (e.g., '/component2')
         navigate('/dashboard');
     };
 
-    function PartiallyHiddenText({ text, visibleChars }) {
-        if(text){
-            const truncatedText = text.substring(0, visibleChars);
-            const ellipsis = text.length > visibleChars ? '...' : '';
-          
-            return (
-              <span className="partially-hidden-text">
-                {truncatedText}{ellipsis}
-              </span>
-            );
-        }
-      }
+    const goSentTo = () => {
+        // Use history.push to navigate to a specific route (e.g., '/component2')
+        navigate('/sendTo');
+    };
 
     return (
         <div className="App">
@@ -46,43 +37,117 @@ const Send = (props) => {
 
                     <div style={{ marginLeft: '190px', marginTop: '15px' }}>
                         <Box sx={{ bgcolor: '#282c34', height: '70vh', width: '50vh', flexGrow: 1, }}>
-                            <div style={{marginLeft: '20px'}} class="page-container__header send__header" data-testid="page-container__header"><div class="page-container__title">Send to</div>
-                                <a onClick={goToDashboard} class="button btn-link page-container__header-close-text" role="button" tabindex="0">Cancel</a></div>
-                            <div class="ens-input send__to-row"><div class="ens-input__wrapper">
 
-                                <div style={{ marginLeft: '30px', marginTop: '15px' }}>
-
-                                    <input class="ens-input__wrapper__input" type="text" dir="auto" placeholder="Enter public address" spellcheck="false" data-testid="ens-input" value=""></input>
-                                </div>
-                            </div></div>
-
-                            <div><p>Your accounts</p></div><br></br>
-                            <div class="send__select-recipient-wrapper__list">
-                                <div class="box send__select-recipient-wrapper__group box--flex-direction-row" data-testid="recipient-group">
-
-                                    <Link to='/sendTo'>
-                                        <div class="box send__select-recipient-wrapper__group-item box--padding-4 box--flex-direction-row">
-                                            <div><svg x="0" y="0" width="28" height="28"><rect x="0" y="0" width="28" height="28" transform="translate(8.664006925057517 0.5521327237109247) rotate(35.9 14 14)" fill="#FAAB00"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-3.5820380599961976 -13.625432760794109) rotate(370.9 14 14)" fill="#F2D202"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-24.48820639857301 7.071976417273904) rotate(264.6 14 14)" fill="#186BF2"></rect></svg></div>
-                                            <div class="box send__select-recipient-wrapper__group-item__content box--flex-direction-row" data-testid="recipient"><p class="box mm-text send__select-recipient-wrapper__group-item__title mm-text--body-lg-medium box--flex-direction-row box--color-text-default">Account 1</p><p class="box mm-text send__select-recipient-wrapper__group-item__subtitle mm-text--body-md box--flex-direction-row box--color-text-alternative"><PartiallyHiddenText text={location.state} visibleChars={9} /></p></div>
-                                        </div>
-                                    </Link>
-
-                                    <br></br>
-                                    <Link to='/sendTo'>
-                                        <div class="box send__select-recipient-wrapper__group-item box--padding-4 box--flex-direction-row">
-                                            <div><svg x="0" y="0" width="28" height="28"><rect x="0" y="0" width="28" height="28" transform="translate(8.664006925057517 0.5521327237109247) rotate(35.9 14 14)" fill="#FAAB00"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-3.5820380599961976 -13.625432760794109) rotate(370.9 14 14)" fill="#F2D202"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-24.48820639857301 7.071976417273904) rotate(264.6 14 14)" fill="#186BF2"></rect></svg></div>
-                                            <div class="box send__select-recipient-wrapper__group-item__content box--flex-direction-row" data-testid="recipient"><p class="box mm-text send__select-recipient-wrapper__group-item__title mm-text--body-lg-medium box--flex-direction-row box--color-text-default">Account 2</p><p class="box mm-text send__select-recipient-wrapper__group-item__subtitle mm-text--body-md box--flex-direction-row box--color-text-alternative">0xe2c5...3b8a</p></div>
-                                        </div></Link> <br></br>
-
-                                    <Link to='/sendTo'>
-                                        <div class="box send__select-recipient-wrapper__group-item box--padding-4 box--flex-direction-row">
-                                            <div><svg x="0" y="0" width="28" height="28"><rect x="0" y="0" width="28" height="28" transform="translate(8.664006925057517 0.5521327237109247) rotate(35.9 14 14)" fill="#FAAB00"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-3.5820380599961976 -13.625432760794109) rotate(370.9 14 14)" fill="#F2D202"></rect><rect x="0" y="0" width="28" height="28" transform="translate(-24.48820639857301 7.071976417273904) rotate(264.6 14 14)" fill="#186BF2"></rect></svg></div>
-                                            <div class="box send__select-recipient-wrapper__group-item__content box--flex-direction-row" data-testid="recipient"><p class="box mm-text send__select-recipient-wrapper__group-item__title mm-text--body-lg-medium box--flex-direction-row box--color-text-default">Account 3</p><p class="box mm-text send__select-recipient-wrapper__group-item__subtitle mm-text--body-md box--flex-direction-row box--color-text-alternative">0xe1f6...0b6c</p></div>
-                                        </div></Link>
+                            <Box display="flex" alignItems="center">
+                                <p style={{ marginLeft: '100px' }}>Send To</p>
+                                <Button onClick={goToDashboard} style={{ marginLeft: '100px' }} color="primary">
+                                    Cancel
+                                </Button>
+                            </Box>
 
 
-                                </div>
-                            </div>
+                            <Box
+                                display="flex"
+                                alignItems="center"
+                                border="1px solid silver"
+                                padding="3px"
+                                marginTop="10px"
+                                marginLeft="20px"
+                                width="320px"
+                                borderRadius="10px" // Adding border radius to make the borders round
+                            >
+                                <SearchIcon />
+                                <InputBase
+                                    placeholder="Enter Public Address..."
+                                    inputProps={{ 'aria-label': 'search' }}
+                                    sx={{ color: 'silver' }} // Changing the placeholder text color to silver
+                                />
+                            </Box>
+
+                            <Box display="flex" alignItems="center">
+                                <h4 style={{ marginLeft: '20px' }}>Your Accounts</h4>
+                            </Box>
+
+
+                            <a onClick={goSentTo}
+                                href="#"
+
+                                style={{
+                                    textDecoration: 'none', // Remove underline from the link
+                                }}
+                            >
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    sx={{
+                                        marginLeft: '20px', // Add left margin for spacing
+                                        color: 'white', // Set the initial text color
+                                        '&:hover': {
+                                            color: 'blue', // Change text color on hover
+                                        },
+                                    }}
+                                >
+                                    <img src={round} alt="Image Description" style={{ width: '33px', height: '33px' }} />
+                                    <Box sx={{ marginLeft: '15px' }}>
+                                        <h4>Account 1</h4>
+                                        <p>0x..72d7b</p>
+                                    </Box>
+                                </Box>
+                            </a>
+
+                            <a onClick={goSentTo}
+                                href="#"
+
+                                style={{
+                                    textDecoration: 'none', // Remove underline from the link
+                                }}
+                            >
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    sx={{
+                                        marginLeft: '20px', // Add left margin for spacing
+                                        color: 'white', // Set the initial text color
+                                        '&:hover': {
+                                            color: 'blue', // Change text color on hover
+                                        },
+                                    }}
+                                >
+                                    <img src={round} alt="Image Description" style={{ width: '33px', height: '33px' }} />
+                                    <Box sx={{ marginLeft: '15px' }}>
+                                        <h4>Account 2</h4>
+                                        <p>0x..82d8x</p>
+                                    </Box>
+                                </Box>
+                            </a>
+
+                            <a onClick={goSentTo}
+                                href="#"
+
+                                style={{
+                                    textDecoration: 'none', // Remove underline from the link
+                                }}
+                            >
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    sx={{
+                                        marginLeft: '20px', // Add left margin for spacing
+                                        color: 'white', // Set the initial text color
+                                        '&:hover': {
+                                            color: 'blue', // Change text color on hover
+                                        },
+                                    }}
+                                >
+                                    <img src={round} alt="Image Description" style={{ width: '33px', height: '33px' }} />
+                                    <Box sx={{ marginLeft: '15px' }}>
+                                        <h4>Account 3</h4>
+                                        <p>0x..21n5c</p>
+                                    </Box>
+                                </Box>
+                            </a>
+
+
                         </Box>
                     </div>
 
@@ -90,11 +155,7 @@ const Send = (props) => {
 
                 </Box>
             </Container>
-
-
         </div>
-
-
     )
 }
 
