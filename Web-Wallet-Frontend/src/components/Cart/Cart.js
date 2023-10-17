@@ -1,89 +1,96 @@
 import "../../App.css";
-import Boldplus from '../../assets/Boldplus.png';
-import arrow from '../../assets/arrow.png';
-import swap from '../../assets/swap-36.png';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Boldplus from "../../assets/Boldplus.png";
+import arrow from "../../assets/arrow.png";
+import swap from "../../assets/swap-36.png";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import React, { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import addDetails from "../../services/userDetails";
-import { useSelector, useDispatch } from 'react-redux'
-import { addUserBalance } from '../../store/slices/UserSlices';
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addUserBalance } from "../../store/slices/UserSlices";
+import { addUserAccounts } from "../../store/slices/UserSlices";
+
 
 const Cart = (props) => {
-  const dispatch = useDispatch()
-  const address = useSelector((state) => state.user.value)
-  const bal = useSelector((state) => state.user.bal)
-  const id = useSelector((state) => state.user.id)
-  
- const [balance, setBalance] = React.useState('');
-  
+  const dispatch = useDispatch();
+
+  const address = useSelector((state) => state.user.value);
+  const bal = useSelector((state) => state.user.bal);
+  const id = useSelector((state) => state.user.id);
   const navigate = useNavigate();
 
-  const goToSendFinal = () => {
-    // Use history.push to navigate to a specific route (e.g., '/component2')
-    navigate('/send');
+  const goToSendFinal = async () => {
+    navigate("/send");
   };
 
   const goToBuy = () => {
-    navigate('/buy');
+    navigate("/buy");
   };
 
-  useEffect(()=>{
-    const fetchData = async () => {
-      const res = await addDetails.getUserBalanceByAddress(address)
-      console.log("getRegisterUserByAddress",res.data[0].balance);
-      dispatch(addUserBalance(res.data[0].balance));
-    }
-
-    fetchData().catch(console.error);
-  
-
-  },[props.data, bal]);
-  
   function PartiallyHiddenText({ text, visibleChars }) {
-    console.log("hi",text);
-    if(text){
+    console.log("hi", text);
+    if (text) {
       const truncatedText = text.substring(0, visibleChars);
-      const ellipsis = text.length > visibleChars ? '...' : '';
-    
+      const ellipsis = text.length > visibleChars ? "..." : "";
+
       return (
-        <span className="partially-hidden-text">
-          {truncatedText}{ellipsis}
+        <span className='partially-hidden-text'>
+          {truncatedText}
+          {ellipsis}
         </span>
       );
     }
   }
 
-  console.log("selec",address)
+  console.log("selec", address);
 
-  console.log("selec-id",id)
+  console.log("selec-id", id);
   return (
     <>
-      <Button style={{marginTop: "15px", background: "#1b1e22", color: "#1098fc"}} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; <FileCopyIcon /></Button>
+      <Button
+        style={{ marginTop: "15px", background: "#1b1e22", color: "#1098fc" }}
+        centered
+        variant='contained'
+      >
+        {" "}
+        <PartiallyHiddenText text={address} visibleChars={10} />
+        &nbsp;&nbsp; <FileCopyIcon />
+      </Button>
       <h1 style={{ color: "white", marginLeft: "-20px" }}>{bal} ETH</h1>
       <h4 style={{ color: "#a8aaad", marginLeft: "-20px" }}>$5.00 USD</h4>
       <div style={{ marginTop: "30px", marginLeft: "-15px" }}>
         <Box
           sx={{
-            '& > :not(style)': {
+            "& > :not(style)": {
               m: 2.5,
             },
           }}
         >
-          <img onClick={goToBuy} width="34" height="34" src={Boldplus} alt='svg'></img>
-          <img onClick={goToSendFinal} cursor= "pointer" width="34" height="34" src={arrow} alt='svg'></img>
-          <img width="34" height="34" src={swap} alt='svg'></img>
+          <img
+            onClick={goToBuy}
+            width='34'
+            height='34'
+            src={Boldplus}
+            alt='svg'
+          ></img>
+          <img
+            onClick={goToSendFinal}
+            cursor='pointer'
+            width='34'
+            height='34'
+            src={arrow}
+            alt='svg'
+          ></img>
+          <img width='34' height='34' src={swap} alt='svg'></img>
         </Box>
-        <Box >
+        <Box>
           <Tabs centered style={{ marginTop: "-30px" }}>
-            <h4 style={{ color: 'white', marginLeft: '10px' }}>Buy</h4>
-            <h4 style={{ color: 'white', marginLeft: '50px' }}>Send</h4>
-            <h4 style={{ color: 'white', marginLeft: '40px' }}>Swap</h4>
-
+            <h4 style={{ color: "white", marginLeft: "10px" }}>Buy</h4>
+            <h4 style={{ color: "white", marginLeft: "50px" }}>Send</h4>
+            <h4 style={{ color: "white", marginLeft: "40px" }}>Swap</h4>
           </Tabs>
         </Box>
       </div>
@@ -92,7 +99,3 @@ const Cart = (props) => {
 };
 
 export default Cart;
-
-
-
-

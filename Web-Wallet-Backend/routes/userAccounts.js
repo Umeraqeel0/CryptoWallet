@@ -7,6 +7,7 @@ router.post('/updateBalance/:address', userAccounts.updateBalance);
 router.post('/addBalance/:address', userAccounts.addBalance);
 router.get('/getUserAccount/:id', userAccounts.getUserAccount);
 router.get('/getUserBalanceByAddress/:address', userAccounts.getUserBalanceByAddress);
+router.get('/getAllUserAccounts', userAccounts.getAllUserAccounts);
 
 module.exports = router;
 

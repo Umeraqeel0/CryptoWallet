@@ -45,6 +45,11 @@ class AddressDetails {
         })
     };
 
+    getAllUserAccounts() {
+        return axios.get(API_URL + "getAllUserAccounts", {
+        })
+    };
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

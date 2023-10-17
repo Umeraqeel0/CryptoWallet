@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Link, redirect } from "react-ro
 import AuthService from "../../services/auth.registerUser";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {addUserId} from '../../store/slices/UserSlices';
 
 
 const Login = () => {
+    const dispatch = useDispatch();
     const userRef = useRef();
     const errRef = useRef();
     const navigate = useNavigate();
@@ -29,11 +32,12 @@ const Login = () => {
         try {
             console.log(user, pwd)
             const res = await AuthService.login(user, pwd);
-            console.log("Res", res);
             toast.success("Successfull!", {
                 autoClose: 20000,
             });
-            navigate("/dashboard", { state: res.data });
+            dispatch(addUserId(res.data.id));
+            navigate("/dashboard");
+            
         } catch (err) {
             if (!err?.response) {
                 toast.error("Error No Server Response!", {

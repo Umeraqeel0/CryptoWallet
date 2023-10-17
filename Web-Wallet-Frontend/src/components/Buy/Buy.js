@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 export default function FormDialog() {
     const address = useSelector((state) => state.user.value)
-    const dispatch = useDispatch()
     const navigate = useNavigate();
     const location = useLocation();
 

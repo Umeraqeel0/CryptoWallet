@@ -98,12 +98,23 @@ const getUserBalanceByAddress = async (req, res) => {
   }
 };
 
+const getAllUserAccounts = async (req, res) => {
+  try {
+    const userAcc = await Addresses.findAll();
+    return res.status(201).send(userAcc);
+
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 
 
 module.exports = {
   updateBalance,
   addAddress,
   getUserAccount,
+  getAllUserAccounts,
   getUserBalanceByAddress,
   addBalance
 }
