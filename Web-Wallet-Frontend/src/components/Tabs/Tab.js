@@ -103,7 +103,6 @@ const MetaTab = (props) => {
 
             <Activity></Activity>
                 {/* <text style={{ color: '#a8aaad' }}>You have no transactions</text> */}
-                <br></br><br></br> <br></br><br></br><br></br> <br></br><br></br><br></br>
                
                 <div align="left" style={{ marginTop: "20px" }}>
                     <img width="13" height="13" src={plusMath} alt='svg'></img>
