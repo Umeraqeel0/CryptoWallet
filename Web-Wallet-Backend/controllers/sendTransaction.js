@@ -6,7 +6,7 @@ const timestamp = require("unix-timestamp");
 
 const sendTransaction = async (req, res) => {
   try {
-    var status = false;
+    var status = "Failed";
     const { balance, toAddress } = req.body;
     const fromAddress = req.params.address;
 
@@ -67,7 +67,7 @@ const sendTransaction = async (req, res) => {
     );
 
     if (txData && data) {
-      txData.status = true
+      txData.status = "Confirmed"
       console.log(txData);
       await UserTransaction.create(txData);
       return res.status(201).send(txData);

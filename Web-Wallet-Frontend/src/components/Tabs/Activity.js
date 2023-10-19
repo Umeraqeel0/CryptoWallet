@@ -11,13 +11,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import round from "../../assets/round.png";
 import right from "../../assets/right.png";
-import { Bolt } from "@mui/icons-material";
-import { green } from "@mui/material/colors";
+import userDetails from "../../services/userDetails";
 
 const Activity = () => {
   const navigate = useNavigate();
 
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isTx, setTx] = useState([]);
 
   const openPopup = () => {
     setPopupOpen(true);
@@ -29,7 +29,16 @@ const Activity = () => {
     console.log("closed");
   };
 
-  useEffect(() => {}, [isPopupOpen]);
+  useEffect(() => {
+    console.log("Activity")
+    const fetchData = async () => {
+      const data = await userDetails.getAllUserTx();
+      console.log(data.data);
+      setTx(data.data);
+    };
+
+    fetchData().catch(console.error);
+  }, [isPopupOpen, isTx]);
 
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString("en-US", {
@@ -44,64 +53,43 @@ const Activity = () => {
           display: "flex",
           alignItems: "center",
           marginLeft: "-20px", // Add left margin for spacing
-         
         }}
       >
         <p style={{ marginLeft: "10px" }}>{formattedDate}</p>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          marginLeft: "20px", // Add left margin for spacing
-          marginTop: "0px", // Add top margin for spacing
-          cursor: "pointer",
-        }}
-        onClick={openPopup}
-      >
-        <ArrowDownwardIcon />
-        <div>
-          <h3>
-            <b>Received</b>
-            <br></br>
-            <p
-              style={{ color: "green", marginTop: "-5px", marginLeft: "10px" }}
-            >
-              Confirmed
-            </p>
-          </h3>
-        </div>
-        <p style={{ marginLeft: "550px" }}>0.08456611 ETH</p>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          marginLeft: "20px", // Add left margin for spacing
-          marginTop: "0px", // Add top margin for spacing
-          cursor: "pointer",
-        }}
-        onClick={openPopup}
-      >
-        <ArrowUpwardIcon />
-        <div>
-          <h3>
-            <b style={{ marginLeft: "-40px" }}>Sent</b>
-            <br></br>
-            <p
-              style={{ color: "green", marginTop: "-5px", marginLeft: "10px" }}
-            >
-              Confirmed
-            </p>
-          </h3>
-        </div>
-        <p style={{ marginLeft: "550px" }}>0.08456611 ETH</p>
-      </Box>
-
-      
-
+      <div>
+        {isTx.map((tx, index) => (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "20px", // Add left margin for spacing
+              marginTop: "0px", // Add top margin for spacing
+              cursor: "pointer",
+            }}
+            onClick={openPopup}
+          >
+            <ArrowDownwardIcon />
+            <div>
+              <h3>
+                <b>Received</b>
+                <br></br>
+                <p
+                  style={{
+                    color: "green",
+                    marginTop: "-5px",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {tx.status}
+                </p>
+              </h3>
+            </div>
+            <p style={{ marginLeft: "550px" }}>0.08456611 ETH</p>
+          </Box>
+        ))}
+      </div>
       <Dialog
         open={isPopupOpen}
         onClose={closePopup}

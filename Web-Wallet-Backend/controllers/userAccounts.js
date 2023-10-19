@@ -1,6 +1,8 @@
 const db = require("../models");
 const RegisterUser = db.registerUser;
 const Addresses = db.userAddresses;
+const UserTransaction = db.userTransaction;
+
 const crypto = require('crypto');
 
 const addAddress = async (req, res) => {
@@ -108,6 +110,16 @@ const getAllUserAccounts = async (req, res) => {
   }
 };
 
+const getAllUserTx = async (req, res) => {
+  try {
+    const userAcc = await UserTransaction.findAll();
+    return res.status(201).send(userAcc);
+
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 
 
 module.exports = {
@@ -116,5 +128,6 @@ module.exports = {
   getUserAccount,
   getAllUserAccounts,
   getUserBalanceByAddress,
-  addBalance
+  addBalance,
+  getAllUserTx
 }

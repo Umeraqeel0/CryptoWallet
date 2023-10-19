@@ -50,6 +50,11 @@ class AddressDetails {
         })
     };
 
+    getAllUserTx() {
+        return axios.get(API_URL + "getAllUserTx", {
+        })
+    };
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
