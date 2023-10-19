@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
         },
         balance: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.DOUBLE,
             allowNull: false,
         },
     });

@@ -86,7 +86,7 @@ const Activity = () => {
                 </p>
               </h3>
             </div>
-            <p style={{ marginLeft: "550px" }}>0.08456611 ETH</p>
+            <p style={{ marginLeft: "850px" }}>{tx.balance}</p>
           </Box>
         ))}
       </div>

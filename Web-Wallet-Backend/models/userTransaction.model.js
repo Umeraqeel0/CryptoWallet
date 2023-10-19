@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false
     },
     balance: {
-      type: Sequelize.STRING,
+      type: Sequelize.DOUBLE,
       allowNull: false
     },
     hash: {
