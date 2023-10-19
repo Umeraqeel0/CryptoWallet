@@ -50,6 +50,8 @@ const Cart = (props) => {
   console.log("selec-id", id);
   return (
     <>
+     <Box sx={{ bgcolor: '#282c34', marginTop: '0.1vh', height: '30vh', width: '121.5vh', flexGrow: 2 }}>
+      
       <Button
         style={{ marginTop: "15px", background: "#1b1e22", color: "#1098fc" }}
         centered
@@ -94,6 +96,7 @@ const Cart = (props) => {
           </Tabs>
         </Box>
       </div>
+      </Box>
     </>
   );
 };

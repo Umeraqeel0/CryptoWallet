@@ -40,14 +40,14 @@ function Dashboard() {
     <>
       <Header />
       <Container fixed>
-        <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '120vh', flexGrow: 1 }}>
           <Nav />
           <Cart/>
           <MetaTab />
-        </Box>
       </Container>
     </>
   );
 }
+{/* <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '120vh', flexGrow: 1 }}> */}
+       
 
 export default Dashboard;

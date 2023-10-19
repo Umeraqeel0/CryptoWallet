@@ -50,7 +50,8 @@ const MetaTab = (props) => {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        
+        <Box sx={{  bgcolor: '#282c34',  width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }} >
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     <Tab style={{ color: 'white' }} label="Token" {...a11yProps(0)} />
@@ -102,7 +103,6 @@ const MetaTab = (props) => {
             <CustomTabPanel value={value} index={2}>
 
             <Activity></Activity>
-                {/* <text style={{ color: '#a8aaad' }}>You have no transactions</text> */}
                
                 <div align="left" style={{ marginTop: "20px" }}>
                     <img width="13" height="13" src={plusMath} alt='svg'></img>

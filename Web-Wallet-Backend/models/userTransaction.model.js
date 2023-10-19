@@ -7,12 +7,32 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    sendTo: Sequelize.STRING,
-    from: {
+    from: Sequelize.STRING,
+    to: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    eth: {
+    balance: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    hash: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    timestamp: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    block: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    nonce: {
       type: Sequelize.STRING,
       allowNull: false
     }
