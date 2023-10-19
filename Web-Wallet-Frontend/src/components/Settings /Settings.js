@@ -8,11 +8,43 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
+import React, { useState } from 'react';
+import General from './General';
+import Snaps from './Snaps';
+import Alert from './Alert';
+import About from './About';
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const Settings = () => {
-    const buttonLabels = ['General', 'Advanced', 'Contacts', 'Snaps', ' Security'
-    , 'Alerts', 'Networks', 'About'];
+    const buttonLabels = ['General', 'Snaps', 'Alerts', 'About'];
+    const [secondColumnContent, setSecondColumnContent] = useState(<General></General>);
+
+    const handleButtonClick = (label) => {
+        let content = null;
+
+        if (label === 'General') {
+            content = <General></General>;
+        }
+        else if (label === 'Snaps') {
+            content = <Snaps></Snaps>;
+        }
+        else if (label === 'Alerts') {
+            content = <Alert></Alert>;
+        }
+        else if (label === 'About') {
+            content = <About></About>;
+        }
+
+        // Set the content for the second column
+        setSecondColumnContent(content);
+    };
+    const navigate = useNavigate();
+
+    const goToDashboard = () => {
+        // Use history.push to navigate to a specific route (e.g., '/component2')
+        navigate("/dashboard");
+    };
 
     return (
         <div className="App">
@@ -35,6 +67,7 @@ const Settings = () => {
 
                         {/* Cross Button */}
                         <IconButton
+                            onClick={goToDashboard}
                             edge="end"
                             aria-label="clear"
                             size="small"
@@ -44,24 +77,45 @@ const Settings = () => {
                         </IconButton>
                     </Box>
 
-
-                    <Box display="flex" flexDirection="column">
-                        {buttonLabels.map((label, index) => (
-                            <Button
-                                key={index}
-                                color="primary"
-                                style={{ marginBottom: '5px', width: '120px', color: 'silver' }} // Adjust the width as needed
-                            >
-                                {label}
-                            </Button>
-                        ))}
+                    <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        sx={{
+                            width: '100%',
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: '15%',
+                                padding: '1px',
+                                border: '0px solid #ccc',
+                            }}
+                        >
+                            {buttonLabels.map((label, index) => (
+                                <Button
+                                    key={index}
+                                    color="primary"
+                                    style={{ marginBottom: '5px', width: '100%', color: 'silver' }}
+                                    onClick={() => handleButtonClick(label)}
+                                >
+                                    {label}
+                                </Button>
+                            ))}
+                        </div>
+                        <div
+                            style={{
+                                width: '85%',
+                                padding: '16px',
+                                border: '0px solid #ccc',
+                            }}
+                        >
+                            {secondColumnContent}
+                        </div>
                     </Box>
-
-
                 </Box>
             </Container>
         </div>
-    )
-}
+    );
+};
 
 export default Settings;
