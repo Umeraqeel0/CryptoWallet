@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 const SendDetails = (props) => {
   const bal = useSelector((state) => state.user.bal);
 
-  const [balance, setbalance] = React.useState("");
+  const [balance, setbalance] = React.useState(0);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -113,13 +113,13 @@ const SendDetails = (props) => {
                   <div class='unit-input__input-container'>
                     <input
                       id='balance'
-                      onChange={(e) => setbalance(e.target.value)}
                       value={balance}
                       data-testid='currency-input'
                       type='number'
                       dir='ltr'
                       class='unit-input__input'
                       placeholder='0'
+                      onChange={(e) => setbalance(e.target.value)}
                       style={{ width: "9ch" }} // Use an object to define the style
                     />
                     <div class='unit-input__suffix'>GoerliETH</div>

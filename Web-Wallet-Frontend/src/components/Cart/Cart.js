@@ -61,7 +61,7 @@ const Cart = (props) => {
         <PartiallyHiddenText text={address} visibleChars={10} />
         &nbsp;&nbsp; <FileCopyIcon />
       </Button>
-      <h1 style={{ color: "white", marginLeft: "-20px" }}>{bal} ETH</h1>
+      <h1 style={{ color: "white", marginLeft: "-20px" }}>{(bal).toFixed(2)} ETH</h1>
       <h4 style={{ color: "#a8aaad", marginLeft: "-20px" }}>{(bal * 1553.07).toFixed(2)} USD</h4>
       <div style={{ marginTop: "30px", marginLeft: "-15px" }}>
         <Box

@@ -12,9 +12,12 @@ import Button from "@mui/material/Button";
 import round from "../../assets/round.png";
 import right from "../../assets/right.png";
 import userDetails from "../../services/userDetails";
+import { useSelector } from "react-redux";
 
 const Activity = () => {
   const navigate = useNavigate();
+  const id = useSelector((state) => state.user.id);
+  const address = useSelector((state) => state.user.value);
 
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isTx, setTx] = useState([]);
@@ -30,16 +33,19 @@ const Activity = () => {
   };
 
   useEffect(() => {
-    console.log("Activity")
+    console.log("Activity", id, address);
     const fetchData = async () => {
+     // const data = await userDetails.getUserTxById(id);
       const data = await userDetails.getAllUserTx();
       console.log(data.data);
+     // setTx(data.data);
       setTx(data.data);
     };
 
     fetchData().catch(console.error);
-  }, [isPopupOpen, isTx]);
+  }, [isPopupOpen, id, address]);
 
+  console.log("is", isTx);
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -73,7 +79,7 @@ const Activity = () => {
             <ArrowDownwardIcon />
             <div>
               <h3>
-                <b>Received</b>
+                <b>{tx.from === address ? "Send" : "Received"}</b>
                 <br></br>
                 <p
                   style={{
@@ -86,10 +92,13 @@ const Activity = () => {
                 </p>
               </h3>
             </div>
-            <p style={{ marginLeft: "850px" }}>{tx.balance}</p>
+            <p style={{ marginLeft: "850px" }}>
+              {tx.balance ? tx.balance + " Goerli Eth" : "0 Goerli Eth"}
+            </p>
           </Box>
         ))}
       </div>
+
       <Dialog
         open={isPopupOpen}
         onClose={closePopup}

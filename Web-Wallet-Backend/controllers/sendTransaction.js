@@ -6,8 +6,8 @@ const timestamp = require("unix-timestamp");
 
 const sendTransaction = async (req, res) => {
   try {
-    var status = "Failed";
-    const { balance, toAddress } = req.body;
+    var status = "Txn Failed";                                                                                                                                                                                                                                                                                                                          
+    const { balance, toAddress, registerUserId } = req.body;
     const fromAddress = req.params.address;
 
     console.log(toAddress);
@@ -20,12 +20,13 @@ const sendTransaction = async (req, res) => {
     var txData = {
       from: fromAddress,
       to: toAddress,
-      balance: balance + " ETH",
+      balance: balance,
       hash: txHash,
       timestamp: timestamp.now(),
       status: status,
       block: block,
       nonce: nonce,
+      registerUserId: registerUserId
     };
     console.log(txData);
     const data = await Addresses.findAll({
@@ -33,7 +34,7 @@ const sendTransaction = async (req, res) => {
         address: fromAddress,
       },
     });
-
+   
     if (data[0].dataValues.balance < balance) {
       await UserTransaction.create(txData);
       return res.status(201).send("Insufficient Balance");
@@ -57,6 +58,7 @@ const sendTransaction = async (req, res) => {
 
     const toCurrentBalance = toData[0].dataValues.balance;
     const toNewBalance = toCurrentBalance + balance;
+    console.log(toNewBalance);
     await Addresses.update(
       { balance: toNewBalance },
       {

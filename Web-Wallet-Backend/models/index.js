@@ -29,4 +29,7 @@ db.userAddresses = require("../models/userAddresses.model.js")(sequelize, Sequel
 db.registerUser.hasMany(db.userAddresses);
 db.userAddresses.belongsTo(db.registerUser);
 
+db.registerUser.hasMany(db.userTransaction);
+db.userTransaction.belongsTo(db.registerUser);
+
 module.exports = db;

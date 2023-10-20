@@ -120,6 +120,36 @@ const getAllUserTx = async (req, res) => {
   }
 };
 
+const getUserTxById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userAcc = await UserTransaction.findAll({
+      where: {
+        registerUserId: id
+      }
+    });
+    return res.status(201).send(userAcc);
+
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
+const getUserTxByAddress = async (req, res) => {
+  try {
+    const address = req.params.address;
+    const userAcc = await UserTransaction.findAll({
+      where: {
+        to: address
+      }
+    });
+    return res.status(201).send(userAcc);
+
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 
 
 module.exports = {
@@ -129,5 +159,7 @@ module.exports = {
   getAllUserAccounts,
   getUserBalanceByAddress,
   addBalance,
-  getAllUserTx
+  getAllUserTx,
+  getUserTxById,
+  getUserTxByAddress
 }

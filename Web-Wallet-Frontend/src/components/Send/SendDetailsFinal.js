@@ -21,6 +21,8 @@ const SendDetailsFinal = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const address = useSelector((state) => state.user.value);
+  const id = useSelector((state) => state.user.id);
+  
   const [data, setData] = React.useState(false);
   const bal = useSelector((state) => state.user.bal);
 
@@ -31,11 +33,13 @@ const SendDetailsFinal = (props) => {
 
   const sendTx = async () => {
     setData(true);
+    console.log(address, props.value, props.addr, id);
     try {
       const data = await SendTransaction.sendTx(
         address,
-        props.value,
-        props.addr
+        parseFloat(props.value),
+        props.addr,
+        id
       );
       console.log(data.data);
       if (data.data === "Insufficient Balance") {

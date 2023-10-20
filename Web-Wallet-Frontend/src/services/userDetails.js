@@ -55,6 +55,16 @@ class AddressDetails {
         })
     };
 
+    getUserTxById(id) {
+        return axios.get(API_URL + "getUserTxById/" + id, {
+        })
+    };
+
+    getUserTxByAddress(address) {
+        return axios.get(API_URL + "getUserTxByAddress/" + address, {
+        })
+    };
+
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

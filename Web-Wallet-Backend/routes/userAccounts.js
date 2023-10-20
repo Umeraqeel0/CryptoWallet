@@ -9,6 +9,8 @@ router.get('/getUserAccount/:id', userAccounts.getUserAccount);
 router.get('/getUserBalanceByAddress/:address', userAccounts.getUserBalanceByAddress);
 router.get('/getAllUserAccounts', userAccounts.getAllUserAccounts);
 router.get('/getAllUserTx', userAccounts.getAllUserTx);
+router.get('/getUserTxById/:id', userAccounts.getUserTxById);
+router.get('/getUserTxByAddress/:address', userAccounts.getUserTxByAddress);
 
 
 module.exports = router;
