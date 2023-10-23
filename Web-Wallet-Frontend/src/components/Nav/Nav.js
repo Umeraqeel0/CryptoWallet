@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +14,13 @@ import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import AppBar from '@mui/material/AppBar';
 import { useNavigate } from 'react-router-dom';
+
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import InputBase from '@mui/material/InputBase';
+import round from '../../assets/round.png';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -59,6 +65,48 @@ const StyledMenu = styled((props) => (
 
 const Nav = (props) => {
 
+
+    const [opened, setOpen] = useState(false);
+
+    const handleOpenDialog = () => {
+        setOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpen(false);
+    };
+
+    const accounts = [
+        'Account 1',
+        'Account 2',
+        'Account 3',
+        'Account 4',
+        'Account 5',
+        'Account 6',
+        'Account 7',
+    ];
+
+    const balances = [
+        '0.001',
+        '0.044',
+        '0.005',
+        '0.004',
+        '0.204',
+        '0.404',
+        '0.404',
+    ];
+
+    const addresses = [
+        '0xe23...2d7b',
+        '0xe2b...1d2c',
+        '0xe2r...5d7n',
+        '0xe2w...6d7d',
+        '0xe2y...3d7e',
+        '0xe2i...1d7d',
+        '0xe2n...8d7s',
+    ];
+
+
     const navigate = useNavigate();
 
     const [show1, setShow1] = React.useState(false);
@@ -91,7 +139,7 @@ const Nav = (props) => {
     const onClickSetting = () => {
         navigate("/settings");
     }
-        
+
 
     const ITEM_HEIGHT = 48;
     return (
@@ -114,11 +162,174 @@ const Nav = (props) => {
                             aria-expanded={open ? 'true' : undefined}
                             variant="contained"
                             disableElevation
-                            onClick={handleClick}
+                            onClick={handleOpenDialog}
                             endIcon={<KeyboardArrowDownIcon />}
                         >
                             <b>Accounts</b>
                         </Button>
+
+                        <Box>
+
+                            <Dialog open={opened} onClose={handleCloseDialog} maxWidth="sm">
+                                <DialogContent sx={{ backgroundColor: '#282c34' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <p style={{ color: 'white' }}>
+                                            Select an account
+                                        </p>
+                                        <button onClick={handleCloseDialog} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="white"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            >
+                                                <line x1="18" y1="6" x2="6" y2="18" />
+                                                <line x1="6" y1="6" x2="18" y2="18" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+
+                                    <InputBase
+                                        placeholder="Search accounts"
+                                        inputProps={{ 'aria-label': 'search' }}
+                                        sx={{
+                                            color: 'silver', border: '1px solid white',
+                                            marginTop: '1px',
+                                            width: '100%',
+                                            borderRadius: '10px',
+                                            height: '35px'
+                                        }} // Changing the placeholder text color to silver
+                                    />
+
+                                    <div style={{ overflowY: 'scroll', height: '150px', marginTop: '10px', }}>
+                                        {accounts.map((account, index) => (
+                                            <a
+                                                key={index}
+                                                href="#" // Provide a meaningful link or handle the click event
+                                                style={{ textDecoration: 'none', color: 'white' }} // Remove underline and set text color
+                                            >
+                                                <Box
+                                                    display="flex"
+                                                    alignItems="center"
+                                                    style={{ marginTop: '10px' }} // Add margin from the top
+                                                >
+                                                    <img
+                                                        src={round} // Replace with the actual image source
+                                                        alt={`Account ${index + 1}`}
+                                                        style={{ width: '25px', height: '25px', marginRight: '10px' }} // Customize image size
+                                                    />
+                                                    <div
+                                                        style={{
+                                                            flex: 1,
+                                                            marginLeft: '-1px', // Customize the left margin
+                                                        }}
+                                                    >
+                                                        <p>
+                                                            {account}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            {balances[index]} Eth
+                                                        </p>
+
+                                                        <p style={{ marginTop: '-10px' }}>{addresses[index]}
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            {balances[index]} Eth</p> {/* Add margin from the top */}
+                                                    </div>
+                                                </Box>
+                                            </a>
+                                        ))}
+                                    </div>
+
+
+
+                                    <p style={{
+                                        marginTop: '40px',
+
+                                    }}>
+                                        <span
+                                            style={{
+                                                color: '#1098fc',
+                                                cursor: 'pointer',
+                                                textDecoration: 'none',
+                                                borderBottom: '1px solid transparent',
+                                                transition: 'border-color 0.3s ease',
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.borderBottom = '1px solid #1098fc';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.borderBottom = '1px solid transparent';
+                                            }}
+                                            onClick={() => {
+                                                // Handle the click event here
+                                            }}
+                                        >
+                                            Add Account
+                                        </span>
+                                    </p>
+
+                                    <p>
+                                        <span
+                                            style={{
+                                                color: '#1098fc',
+                                                cursor: 'pointer',
+                                                textDecoration: 'none',
+                                                borderBottom: '1px solid transparent',
+                                                transition: 'border-color 0.3s ease',
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.borderBottom = '1px solid #1098fc';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.borderBottom = '1px solid transparent';
+                                            }}
+                                            onClick={() => {
+                                                // Handle the click event here
+                                            }}
+                                        >
+                                            Import account
+                                        </span>
+                                    </p>
+
+                                    <p>
+                                        <span
+                                            style={{
+                                                color: '#1098fc',
+                                                cursor: 'pointer',
+                                                textDecoration: 'none',
+                                                borderBottom: '1px solid transparent',
+                                                transition: 'border-color 0.3s ease',
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.borderBottom = '1px solid #1098fc';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.borderBottom = '1px solid transparent';
+                                            }}
+                                            onClick={() => {
+                                                // Handle the click event here
+                                            }}
+                                        >
+                                            Add Hardware Wallet
+                                        </span>
+                                    </p>
+
+                                </DialogContent>
+                            </Dialog>
+
+
+
+                        </Box>
+
+
+
+
+
                         <StyledMenu
                             id="demo-customized-menu"
                             MenuListProps={{
@@ -176,7 +387,7 @@ const Nav = (props) => {
                         Notifications
                     </MenuItem>
                     <Divider sx={{ my: 0.5 }} />
-                   
+
                     <MenuItem onClick={handleClose} disableRipple>
                         More
                     </MenuItem>
