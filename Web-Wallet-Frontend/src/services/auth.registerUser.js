@@ -23,6 +23,10 @@ class AuthService {
     });
   }
 
+  addAccount(id) {
+    return axios.post(API_URL + "addAddress/" + id);
+  }
+
   getRegisterUserById(id, accessToken) {
     console.log("ID", id);
     console.log("ID", accessToken);
