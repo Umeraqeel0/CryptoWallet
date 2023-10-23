@@ -20,10 +20,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import InputBase from "@mui/material/InputBase";
 import round from "../../assets/round.png";
-import userDetails from "../../services/userDetails";
+import UserDetails from "../../services/userDetails";
 import registerUser from "../../services/auth.registerUser";
+import { useDispatch, useSelector } from 'react-redux'
+import { addUserAddress, addUserBalance} from '../../store/slices/UserSlices';
 
-import { useSelector } from "react-redux";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -68,10 +69,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-
-
 const Nav = (props) => {
-  
   const id = useSelector((state) => state.user.id);
   const [opened, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
@@ -83,30 +81,28 @@ const Nav = (props) => {
   const [getOn, setOn] = React.useState(null);
   const open = Boolean(anchorEl);
   const openDot = Boolean(getOn);
-
-
+  const dispatch = useDispatch();
+  
   const handleOpenDialog = () => {
     setOpen(true);
     const fetch = async () => {
-        const data = await userDetails.getUserAccount(id);
-        console.log("User Accounts",data.data);
-        setAddresses(data.data);
-     }
-     fetch();
+      const data = await UserDetails.getUserAccount(id);
+      console.log("User Accounts", data.data);
+      setAddresses(data.data);
+    };
+    fetch();
   };
 
   const addAccount = async () => {
-        const data = await registerUser.addAccount(id);
-        console.log("Account Added", data);
-        setOpen(false);
-  }
+    const data = await registerUser.addAccount(id);
+    console.log("Account Added", data);
+    setOpen(false);
+  };
 
   const handleCloseDialog = () => {
     setOpen(false);
   };
-  
-  
-  
+
   const handleClickDot = (event) => {
     setOn(event.currentTarget);
   };
@@ -122,10 +118,19 @@ const Nav = (props) => {
     setAnchorEl(null);
   };
 
-  
   const onClickSetting = () => {
     navigate("/settings");
   };
+
+  const handleValue = async (e) => {
+    console.log(e.target.value);
+    console.log("UserId");
+    const bal = await UserDetails.getUserBalanceByAddress(e.target.value);
+    console.log("getRegisterUserByAddress", bal.data[0].balance);
+    dispatch(addUserBalance(bal.data[0].balance));
+    dispatch(addUserAddress(e.target.value));
+    setOpen(false);
+  }
 
   function PartiallyHiddenText({ text, visibleChars }) {
     console.log("hi", text);
@@ -219,61 +224,71 @@ const Nav = (props) => {
                       height: "35px",
                     }} // Changing the placeholder text color to silver
                   />
-
-                  <div
-                    style={{
-                      overflowY: "scroll",
-                      height: "150px",
-                      marginTop: "10px",
-                    }}
-                  >
-                    {addresses.map((account, index) => (
-                      <a
-                        key={index}
-                        href='#' // Provide a meaningful link or handle the click event
-                        style={{ textDecoration: "none", color: "white" }} // Remove underline and set text color
-                      >
-                        <Box
-                          display='flex'
-                          alignItems='center'
-                          style={{ marginTop: "10px" }} // Add margin from the top
-                        >
-                          <img
-                            src={round} // Replace with the actual image source
-                            alt={`Account ${index + 1}`}
-                            style={{
-                              width: "25px",
-                              height: "25px",
-                              marginRight: "10px",
-                            }} // Customize image size
-                          />
-                          <div
-                            style={{
-                              flex: 1,
-                              marginLeft: "-1px", // Customize the left margin
-                            }}
-                          >
-                            <p>
-                              Account {index + 1}
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              {account.balance} Eth
-                            </p>
-                            <p style={{ marginTop: "-10px" }}>
-                            <PartiallyHiddenText text={account.address} visibleChars={8} />
-                              
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 
+                    <div
+                      style={{
+                        overflowY: "scroll",
+                        height: "150px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      {addresses.map((account, index) => (
+                        <a
+                          key={index}
+                          onClick={handleValue}
+                          value={account.address}
                           
-                              {account.balance} Eth
-                            </p>{" "}
-                            {/* Add margin from the top */}
-                          </div>
-                        </Box>
-                      </a>
-                    ))}
-                  </div>
-
+                          href='#' // Provide a meaningful link or handle the click event
+                          style={{ textDecoration: "none", color: "white" }} // Remove underline and set text color
+                        >
+                          <Box
+                            display='flex'
+                            alignItems='center'
+                            style={{ marginTop: "10px" }}
+                          >
+                            <img
+                              src={round} // Replace with the actual image source
+                              alt={`Account ${index + 1}`}
+                              style={{
+                                width: "25px",
+                                height: "25px",
+                                marginRight: "10px",
+                              }} // Customize image size
+                            />
+                            <div
+                              style={{
+                                flex: 1,
+                                marginLeft: "-1px", // Customize the left margin
+                              }}
+                            
+                            >
+                              <p>
+                                Account {index + 1}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {account.balance} Eth
+                              </p>
+                              <p style={{ marginTop: "-10px" }}>
+                                <option
+                                value={account.address}>
+                                  <PartiallyHiddenText
+                                    text={account.address}
+                                    visibleChars={8}
+                                  />
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                                  {account.balance} Eth
+                                </option>
+                              </p>{" "}
+                              {/* Add margin from the top */}
+                            </div>
+                          </Box>
+                        </a>
+                      ))}
+                    </div>
+                  
                   <p
                     style={{
                       marginTop: "40px",
@@ -353,11 +368,8 @@ const Nav = (props) => {
                 </DialogContent>
               </Dialog>
             </Box>
-
           </div>
         </Typography>
-
-
 
         <IconButton
           sx={{ color: "white" }}
@@ -393,8 +405,6 @@ const Nav = (props) => {
             More
           </MenuItem>
         </StyledMenu>
-
-
       </Toolbar>
     </AppBar>
   );

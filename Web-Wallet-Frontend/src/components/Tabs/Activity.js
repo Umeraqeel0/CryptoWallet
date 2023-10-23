@@ -15,7 +15,6 @@ import userDetails from "../../services/userDetails";
 import { useSelector } from "react-redux";
 
 const Activity = () => {
-  const navigate = useNavigate();
   const id = useSelector((state) => state.user.id);
   const address = useSelector((state) => state.user.value);
 
@@ -36,8 +35,8 @@ const Activity = () => {
     console.log("Activity", id, address);
     const fetchData = async () => {
      // const data = await userDetails.getUserTxById(id);
-      const data = await userDetails.getAllUserTx();
-      console.log(data.data);
+      const data = await userDetails.getUserTxByAddress(address);
+      console.log("se",data.data);
      // setTx(data.data);
       setTx(data.data);
     };
@@ -80,6 +79,40 @@ const Activity = () => {
             <div>
               <h3>
                 <b>{tx.from === address ? "Send" : "Received"}</b>
+                <br></br>
+                <p
+                  style={{
+                    color: "green",
+                    marginTop: "-5px",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {tx.status}
+                </p>
+              </h3>
+            </div>
+            <p style={{ marginLeft: "850px" }}>
+              {tx.balance ? tx.balance + " Goerli Eth" : "0 Goerli Eth"}
+            </p>
+          </Box>
+        ))}
+      </div>
+      <div>
+        {isTx.map((tx, index) => (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "20px", // Add left margin for spacing
+              marginTop: "0px", // Add top margin for spacing
+              cursor: "pointer",
+            }}
+            onClick={openPopup}
+          >
+            <ArrowDownwardIcon />
+            <div>
+              <h3>
+                <b>{tx.to === address ? "Received" : "Send"}</b>
                 <br></br>
                 <p
                   style={{

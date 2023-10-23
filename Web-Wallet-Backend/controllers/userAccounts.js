@@ -140,7 +140,7 @@ const getUserTxByAddress = async (req, res) => {
     const address = req.params.address;
     const userAcc = await UserTransaction.findAll({
       where: {
-        to: address
+        from: address
       }
     });
     return res.status(201).send(userAcc);
