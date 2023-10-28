@@ -5,6 +5,7 @@ const initialState = {
   id: 0,
   bal: 0,
   accounts: [],
+  addresses: [],
   txDetails: []
 };
 const userSlices = createSlice({
@@ -23,6 +24,9 @@ const userSlices = createSlice({
     addUserAccounts(state, action) {
       state.accounts.push(action.payload);
     },
+    addUserAddresses(state, action) {
+      state.addresses.push(action.payload);
+    },
     addTx(state, action) {
       state.txDetails.push(action.payload);
     },
@@ -30,4 +34,4 @@ const userSlices = createSlice({
 });
 
 export default userSlices.reducer;
-export const { addUserId, addUserAddress, addUserBalance, addUserAccounts, addTx } = userSlices.actions;
+export const { addUserId, addUserAddress, addUserBalance, addUserAccounts, addTx, addUserAddresses} = userSlices.actions;

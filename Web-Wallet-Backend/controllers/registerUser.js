@@ -1,14 +1,16 @@
 const db = require("../models");
+const networks = require("../config/networks");
+var bcrypt = require("bcryptjs");
+const {Web3} = require('web3');
 const RegisterUser = db.registerUser;
 const Addresses = db.userAddresses;
-const crypto = require('crypto');
-var bcrypt = require("bcryptjs");
-const addArray = [];
 
 const createUser = async (req, res, next) => {
   try {
+    const web3 = new Web3(networks.PUBLIC_SEPOLIA_TESTNET);
+    const address = web3.eth.accounts.create();
+  
     const { name, email, password } = req.body;
-    var address = '0x' + crypto.randomBytes(16).toString('hex');
     const data = await RegisterUser.create({
       name: name.toLowerCase(),
       email: email.toLowerCase(),
@@ -16,7 +18,8 @@ const createUser = async (req, res, next) => {
     });
     const data1 = await Addresses.create({
       registerUserId: data.dataValues.id,
-      address: address,
+      address: address.address,
+      privateKey: address.privateKey,
       balance: 0
     });
     if (data && data1) {

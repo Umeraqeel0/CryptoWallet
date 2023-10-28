@@ -7,8 +7,7 @@ class SendTransaction {
     console.log("sendTx",address,balance, toAddress,registerUserId, )
     return axios.post(API_URL + "sendTransaction/" + address, {
       balance,
-      toAddress,
-      registerUserId
+      toAddress
     });
   }
 }

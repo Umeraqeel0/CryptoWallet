@@ -16,14 +16,18 @@ import Container from "@mui/material/Container";
 import { useDispatch, useSelector } from "react-redux";
 import SendTransaction from "../../services/SendTransaction";
 import { addTx } from "../../store/slices/UserSlices";
+import { Dimmer, Loader, Image, Segment } from "semantic-ui-react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SendDetailsFinal = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const address = useSelector((state) => state.user.value);
   const id = useSelector((state) => state.user.id);
-  
+
   const [data, setData] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
+
   const bal = useSelector((state) => state.user.bal);
 
   const goToDashboard = () => {
@@ -35,13 +39,15 @@ const SendDetailsFinal = (props) => {
     setData(true);
     console.log(address, props.value, props.addr, id);
     try {
+      setLoader(true);
       const data = await SendTransaction.sendTx(
         address,
-        parseFloat(props.value),
+        props.value,
         props.addr,
         id
       );
       console.log(data.data);
+      setLoader(false);
       if (data.data === "Insufficient Balance") {
         toast.error("Insufficient Balance!", {
           autoClose: 2000,
@@ -53,7 +59,7 @@ const SendDetailsFinal = (props) => {
         dispatch(addTx(data.data));
 
         toast.success("Transaction Successfull.", {
-          autoClose: 3000,
+          autoClose: 6000,
         });
 
         setTimeout(() => {
@@ -66,11 +72,11 @@ const SendDetailsFinal = (props) => {
           autoClose: 20000,
         });
       } else if (e.response?.status === 409) {
-        toast.error("Error Email Taken!", {
+        toast.error("Error!", {
           autoClose: 20000,
         });
       } else {
-        toast.error("Email or Username Already Used!", {
+        toast.error("Transaction Failed!", {
           autoClose: 20000,
         });
       }
@@ -228,6 +234,11 @@ const SendDetailsFinal = (props) => {
               Confirm
             </Button>
           </Box>
+          {loader && (
+            <Box display='flex' justifyContent='center' alignItems='center' marginTop='40px'>
+            <CircularProgress />
+          </Box>
+          )}     
         </Box>
       </Container>
     </>

@@ -11,10 +11,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        balance: {
-            type: Sequelize.DOUBLE,
+        privateKey: {
+            type: Sequelize.STRING,
             allowNull: false,
-        },
+        }
     });
     return UserAdd;
 }

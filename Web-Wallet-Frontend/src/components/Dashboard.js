@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Header from './Header/Header';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import MetaTab from './Tabs/Tab';
 import Nav from './Nav/Nav';
@@ -10,7 +9,7 @@ import UserDetails from "../services/userDetails";
 import '../App.css';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { addUserAddress, addUserBalance, addUserAccounts} from '../store/slices/UserSlices';
+import { addUserAddress, addUserBalance, addUserAccounts, addUserAddresses} from '../store/slices/UserSlices';
 
 function Dashboard() {
   const id = useSelector((state) => state.user.id);
@@ -22,15 +21,15 @@ function Dashboard() {
     const fetchData = async () => {
       console.log("UserId", id);
       const res = await UserDetails.getUserAccount(id);
-      console.log("getUserAccount", res.data[0].address);
+      console.log("getUserAccount", res.data);
       const bal = await UserDetails.getUserBalanceByAddress(res.data[0].address);
-      console.log("getRegisterUserByAddress", bal.data[0].balance);
+      console.log("getRegisterUserByAddress", bal.data);
       const acc = await UserDetails.getAllUserAccounts();
       console.log("Send", acc.data);
       dispatch(addUserAccounts(acc.data));
-      dispatch(addUserBalance(bal.data[0].balance));
+      dispatch(addUserBalance(bal.data));
       dispatch(addUserAddress(res.data[0].address));
-     
+      dispatch(addUserAddresses(res.data));
     }
 
     fetchData().catch(console.error);
