@@ -3,11 +3,12 @@ import axios from "axios";
 const API_URL = "http://localhost:3001/admin/";
 
 class SendTransaction {
-  sendTx(address, balance, toAddress,registerUserId) {
-    console.log("sendTx",address,balance, toAddress,registerUserId, )
+  sendTx(address, balance, toAddress, registerUserId) {
+    console.log("sendTx",address,balance, toAddress, registerUserId, )
     return axios.post(API_URL + "sendTransaction/" + address, {
       balance,
-      toAddress
+      toAddress,
+      registerUserId
     });
   }
 }

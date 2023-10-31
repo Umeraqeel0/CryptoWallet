@@ -26,7 +26,6 @@ const SendDetailsFinal = (props) => {
   const id = useSelector((state) => state.user.id);
 
   const [data, setData] = React.useState(false);
-  const [loader, setLoader] = React.useState(false);
 
   const bal = useSelector((state) => state.user.bal);
 
@@ -39,7 +38,7 @@ const SendDetailsFinal = (props) => {
     setData(true);
     console.log(address, props.value, props.addr, id);
     try {
-      setLoader(true);
+      navigate("/dashboard");
       const data = await SendTransaction.sendTx(
         address,
         props.value,
@@ -47,7 +46,6 @@ const SendDetailsFinal = (props) => {
         id
       );
       console.log(data.data);
-      setLoader(false);
       if (data.data === "Insufficient Balance") {
         toast.error("Insufficient Balance!", {
           autoClose: 2000,
@@ -57,14 +55,14 @@ const SendDetailsFinal = (props) => {
         }, 1000);
       } else {
         dispatch(addTx(data.data));
+        navigate("/dashboard");
+        // toast.success("Transaction Successfull.", {
+        //   autoClose: 3000,
+        // });
 
-        toast.success("Transaction Successfull.", {
-          autoClose: 6000,
-        });
-
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1000);
+        // setTimeout(() => {
+        //   navigate("/dashboard");
+        // }, 1000);
       }
     } catch (e) {
       if (!e?.response) {
@@ -234,11 +232,6 @@ const SendDetailsFinal = (props) => {
               Confirm
             </Button>
           </Box>
-          {loader && (
-            <Box display='flex' justifyContent='center' alignItems='center' marginTop='40px'>
-            <CircularProgress />
-          </Box>
-          )}     
         </Box>
       </Container>
     </>

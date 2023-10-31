@@ -135,7 +135,7 @@ export default function FormDialog() {
                             />
                         </Box>
 
-                        <Button style={{ marginTop: "70px", marginLeft: '60px', background: "#1b1e22", color: "#1098fc" }} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; 0x4n7j...7d7b <FileCopyIcon /></Button>
+                        <Button style={{ marginTop: "70px", marginLeft: '60px', background: "#1b1e22", color: "#1098fc" }} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; <FileCopyIcon /></Button>
 
 
                         <Box

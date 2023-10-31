@@ -153,6 +153,20 @@ const getUserTxByAddress = async (req, res) => {
   }
 };
 
+const getUserTxByToAddress = async (req, res) => {
+  try {
+    const address = req.params.address;
+    const userAcc = await UserTransaction.findAll({
+      where: {
+        to: address,
+      },
+    });
+    return res.status(201).send(userAcc);
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   updateBalance,
   addAddress,
@@ -163,4 +177,5 @@ module.exports = {
   getAllUserTx,
   getUserTxById,
   getUserTxByAddress,
+  getUserTxByToAddress
 };

@@ -34,11 +34,19 @@ const Activity = () => {
   useEffect(() => {
     console.log("Activity", id, address);
     const fetchData = async () => {
-     // const data = await userDetails.getUserTxById(id);
+      // const data = await userDetails.getUserTxById(id);
       const data = await userDetails.getUserTxByAddress(address);
-      console.log("se",data.data);
-     // setTx(data.data);
-      setTx(data.data);
+      console.log("cc", data.data.length);
+      if(data.data.length > 0){
+        console.log("FromData", data.data);
+        setTx(data.data);
+      }
+      else{
+        const dataTo = await userDetails.getUserTxByToAddress(address);
+        console.log("ToData", dataTo.data);
+        setTx(dataTo.data);
+      }
+    
     };
 
     fetchData().catch(console.error);
@@ -92,7 +100,7 @@ const Activity = () => {
               </h3>
             </div>
             <p style={{ marginLeft: "850px" }}>
-              {tx.balance ? tx.balance + " Goerli Eth" : "0 Goerli Eth"}
+              {tx.value ? tx.value + " Goerli Eth" : "0 Goerli Eth"}
             </p>
           </Box>
         ))}
@@ -109,10 +117,21 @@ const Activity = () => {
             }}
             onClick={openPopup}
           >
-            <ArrowDownwardIcon />
+            {tx.to === address ? (
+              <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "0px", // Add left margin for spacing
+              marginTop: "0px", // Add top margin for spacing
+              cursor: "pointer",
+            }}
+            onClick={openPopup}
+          >
+            <ArrowUpwardIcon />
             <div>
               <h3>
-                <b>{tx.to === address ? "Received" : "Send"}</b>
+                <b>Received</b>
                 <br></br>
                 <p
                   style={{
@@ -126,8 +145,10 @@ const Activity = () => {
               </h3>
             </div>
             <p style={{ marginLeft: "850px" }}>
-              {tx.balance ? tx.balance + " Goerli Eth" : "0 Goerli Eth"}
+              {tx.value ? tx.value + " Goerli Eth" : "0 Goerli Eth"}
             </p>
+          </Box>
+            ) : ""}
           </Box>
         ))}
       </div>

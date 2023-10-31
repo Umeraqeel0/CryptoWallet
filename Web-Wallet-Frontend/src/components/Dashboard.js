@@ -46,7 +46,6 @@ function Dashboard() {
     </>
   );
 }
-{/* <Box sx={{ bgcolor: '#282c34', height: '80vh', width: '120vh', flexGrow: 1 }}> */}
-       
+     
 
 export default Dashboard;
