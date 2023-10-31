@@ -24,6 +24,13 @@ import UserDetails from "../../services/userDetails";
 import registerUser from "../../services/auth.registerUser";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserAddress, addUserBalance } from "../../store/slices/UserSlices";
+import eth from '../../assets/eth.png';
+import goreli from '../../assets/goreli.png';
+import sepolia from '../../assets/sepolia.png';
+import linea from '../../assets/linea.png';
+import lineaEth from '../../assets/lineaEth.png';
+import polygon from '../../assets/polygon.png';
+import { Switch } from '@mui/material';
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -131,6 +138,36 @@ const Nav = (props) => {
     navigate("/settings");
   };
 
+  const [openNetwork, setNetworkOpen] = useState(false);
+
+    const handleOpenNetworkDialog = () => {
+        setNetworkOpen(true);
+    };
+
+    const handleCloseNetworkDialog = () => {
+        setNetworkOpen(false);
+    };
+    const [showTestNetworks, setShowTestNetworks] = useState(false);
+
+    const handleToggle = () => {
+        setShowTestNetworks(!showTestNetworks);
+    };
+
+    const networks = [
+      'Ethereum Mainnet',
+      'Linea Mainnet',
+      'Polygon'
+  ];
+
+  const testNetworks = [
+      'Goreli',
+      'Sepolia',
+      'Linea Goreli'
+  ];
+
+  const networkImages = [eth, linea, polygon];
+  const testNetworkImages = [goreli, sepolia, lineaEth];
+
   const handleValue = async (e) => {
     console.log(e.target.value);
     console.log("UserId");
@@ -163,11 +200,191 @@ const Nav = (props) => {
         <Button
           sx={{ bgcolor: "#1b1e22" }}
           variant='contained'
-          onClick={handleClick}
+          onClick={handleOpenNetworkDialog}
           endIcon={<KeyboardArrowDownIcon />}
         >
           Networks
         </Button>
+        <Box>
+
+                    <Dialog open={openNetwork} onClose={handleCloseNetworkDialog} maxWidth="sm">
+                        <DialogContent sx={{ backgroundColor: '#282c34' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <p style={{ color: 'white' }}>
+                                    Select an Network
+                                </p>
+                                <button onClick={handleCloseNetworkDialog} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="white"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <line x1="18" y1="6" x2="6" y2="18" />
+                                        <line x1="6" y1="6" x2="18" y2="18" />
+                                    </svg>
+                                </button>
+                            </div>
+
+
+                            <InputBase
+                                placeholder="Search"
+                                inputProps={{ 'aria-label': 'search' }}
+                                sx={{
+                                    color: 'silver', border: '1px solid white',
+                                    marginTop: '1px',
+                                    width: '100%',
+                                    borderRadius: '10px',
+                                    height: '35px'
+                                }} // Changing the placeholder text color to silver
+                            />
+
+                            <div style={{ overflowY: 'scroll', height: '130px', marginTop: '10px' }}>
+                                {networks.map((network, index) => (
+                                    <a
+                                        key={index}
+                                        href="#"
+                                        style={{
+                                            textDecoration: 'none',
+                                            color: 'white',
+                                            display: 'block',
+                                            transition: 'background-color 0.3s',
+                                        }}
+                                    >
+                                        <Box
+                                            display="flex"
+                                            alignItems="center"
+                                            style={{ marginTop: '10px' }}
+                                        >
+                                            <img
+                                                src={networkImages[index]} // Use the corresponding image source
+                                                alt={`Network ${index + 1}`}
+                                                style={{ width: '25px', height: '25px', marginRight: '10px' }}
+                                            />
+                                            <div
+                                                style={{
+                                                    flex: 1,
+                                                    marginLeft: '-1px',
+                                                }}
+                                            >
+                                                <p>
+                                                    {network}
+                                                </p>
+                                            </div>
+                                        </Box>
+                                    </a>
+                                ))}
+                            </div>
+
+
+                            <div>
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    style={{ marginTop: '10px' }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color: '#1098fc',
+                                            textDecoration: 'none',
+                                            borderBottom: '1px solid transparent',
+                                            transition: 'border-color 0.3s ease',
+                                        }}
+                                    >
+                                        Show test networks
+                                    </Typography>
+                                    <Switch
+                                        sx={{ marginLeft: '80px' }}
+                                        checked={showTestNetworks}
+                                        onChange={handleToggle}
+                                        color="primary"
+                                    />
+                                </Box>
+
+                                {showTestNetworks && (
+                                    <div style={{ overflowY: 'scroll', height: '130px', marginTop: '1px' }}>
+                                        <div >
+                                            {testNetworks.map((network, index) => (
+                                                <a
+                                                    key={index}
+                                                    href="#"
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'white',
+                                                        display: 'block',
+                                                        transition: 'background-color 0.3s',
+                                                    }}
+                                                >
+                                                    <Box
+                                                        display="flex"
+                                                        alignItems="center"
+                                                        style={{ marginTop: '10px' }}
+                                                    >
+                                                        <img
+                                                            src={testNetworkImages[index]} // Use the corresponding image source
+                                                            alt={`Network ${index + 1}`}
+                                                            style={{ width: '25px', height: '25px', marginRight: '10px' }}
+                                                        />
+                                                        <div
+                                                            style={{
+                                                                flex: 1,
+                                                                marginLeft: '-1px',
+                                                            }}
+                                                        >
+                                                            <p>
+                                                                {network}
+                                                            </p>
+                                                        </div>
+                                                    </Box>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center', // Center horizontally within the row
+                                }}
+                            >
+                                <Box
+                                    component="button"
+                                    sx={{
+                                        width: '300px',
+                                        height: '35px',
+                                        backgroundColor: 'transparent',
+                                        border: '2px solid #1098fc',
+                                        borderRadius: '20px',
+                                        padding: '6px 12px',
+                                        fontSize: '16px',
+                                        color: '#1098fc',
+                                        '&:hover': {
+                                            backgroundColor: '#1098fc',
+                                            color: 'white',
+                                        },
+                                    }}
+                                >
+                                    Add Network
+                                </Box>
+                            </Box>
+
+
+                        </DialogContent>
+
+
+                    </Dialog>
+
+
+
+                </Box>
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           <div>
             <Button

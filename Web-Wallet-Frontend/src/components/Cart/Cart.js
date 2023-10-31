@@ -90,7 +90,7 @@ const Cart = (props) => {
         </Box>
         <Box>
           <Tabs centered style={{ marginTop: "-30px" }}>
-            <h4 style={{ color: "white", marginLeft: "10px" }}>Buy</h4>
+            <h4 style={{ color: "white", marginLeft: "10px" }}>Account</h4>
             <h4 style={{ color: "white", marginLeft: "50px" }}>Send</h4>
             <h4 style={{ color: "white", marginLeft: "40px" }}>Swap</h4>
           </Tabs>

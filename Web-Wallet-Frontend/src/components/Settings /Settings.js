@@ -14,10 +14,11 @@ import Snaps from './Snaps';
 import Alert from './Alert';
 import About from './About';
 import { useLocation, useNavigate } from "react-router-dom";
+import Network from './Network';
 
 
 const Settings = () => {
-    const buttonLabels = ['General', 'Snaps', 'Alerts', 'About'];
+    const buttonLabels = ['General', 'Snaps', 'Alerts','Network', 'About'];
     const [secondColumnContent, setSecondColumnContent] = useState(<General></General>);
 
     const handleButtonClick = (label) => {
@@ -31,6 +32,9 @@ const Settings = () => {
         }
         else if (label === 'Alerts') {
             content = <Alert></Alert>;
+        }
+        else if (label === 'Network') {
+            content = <Network></Network>;
         }
         else if (label === 'About') {
             content = <About></About>;
