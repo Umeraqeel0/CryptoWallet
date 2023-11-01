@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import qrcode from '../../assets/qrcode.png';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
+import {QRCodeSVG} from 'qrcode.react';
 
 
 export default function FormDialog() {
@@ -120,22 +121,20 @@ export default function FormDialog() {
 
                         <Box
                             component="div" // Use "div" as the component for the Box
-                            width="100px"    // Set the width as per your requirements
-                            height="80px"   // Set the height as per your requirements
-                            marginLeft="100px" // Set the left spacing as per your requirements
-                            marginTop="60px"  // Set the top spacing as per your requirements
+                            width="180px"    // Set the width as per your requirements
+                            height="180px"   // Set the height as per your requirements
+                            marginLeft="55px" // Set the left spacing as per your requirements
+                            marginTop="0px"  // Set the top spacing as per your requirements
                             bgcolor="lightgray" // Set the background color if needed
                             display="flex"   // You can adjust display property as needed
                             alignItems="center" // You can adjust alignment as needed
                             justifyContent="center" // You can adjust alignment as needed
                         >
-                            <img
-                                src={qrcode}// Replace with your image URL
-                                alt="Custom Image"
-                            />
+                            <QRCodeSVG value="0xe2b5a5b611643c7e0e4D705315bf580B75472d7b"
+                                size="256" />
                         </Box>
 
-                        <Button style={{ marginTop: "70px", marginLeft: '60px', background: "#1b1e22", color: "#1098fc" }} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; <FileCopyIcon /></Button>
+                        <Button style={{ marginTop: "30px", marginLeft: '60px', background: "#1b1e22", color: "#1098fc" }} centered variant="contained">  <PartiallyHiddenText text={address} visibleChars={10} />&nbsp;&nbsp; 0x4n7j...7d7b <FileCopyIcon /></Button>
 
 
                         <Box
@@ -298,7 +297,7 @@ export default function FormDialog() {
                                     padding: '6px 12px',
                                     fontSize: '16px',
                                     color: '#1098fc',
-                                    cursor:'pointer',
+                                    cursor: 'pointer',
                                     '&:hover': {
                                         backgroundColor: '#1098fc',
                                         color: 'white',
@@ -312,7 +311,7 @@ export default function FormDialog() {
                             <Box
                                 component="button"
                                 sx={{
-                                    marginLeft:'15px',
+                                    marginLeft: '15px',
                                     width: '140px',
                                     height: '35px',
                                     backgroundColor: '#1098fc',
@@ -321,8 +320,8 @@ export default function FormDialog() {
                                     padding: '6px 12px',
                                     fontSize: '16px',
                                     color: 'white',
-                                    cursor:'pointer',
-                                    
+                                    cursor: 'pointer',
+
                                 }}
                                 onClick={handleOpenSecond}
                             >
