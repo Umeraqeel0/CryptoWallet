@@ -5,12 +5,7 @@ const API_URL = "http://localhost:3001/admin/";
 class AddressDetails {
   getRegisterUserById(id, accessToken) {
     console.log("ID", id);
-    console.log("ID", accessToken);
-    return axios.get(API_URL + "getRegisterUserById/" + id, {
-      headers: {
-        Authorization: `${accessToken}`,
-      },
-    });
+    return axios.get(API_URL + "getRegisterUserById/" + id, {});
   }
 
   getUserAccount(id) {
@@ -68,6 +63,11 @@ class AddressDetails {
   getUserTxByToAddress(address) {
     return axios.get(API_URL + "getUserTxByToAddress/" + address, {});
   }
+  getUserAccountByAddress(address) {
+    return axios.get(API_URL + "getUserAccountByAddress/" + address, {});
+  }
+  
+  
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

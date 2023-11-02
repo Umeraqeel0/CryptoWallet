@@ -12,6 +12,7 @@ router.get('/getAllUserTx', userAccounts.getAllUserTx);
 router.get('/getUserTxById/:id', userAccounts.getUserTxById);
 router.get('/getUserTxByAddress/:address', userAccounts.getUserTxByAddress);
 router.get('/getUserTxByToAddress/:address', userAccounts.getUserTxByToAddress);
+router.get('/getUserAccountByAddress/:address', userAccounts.getUserAccountByAddress);
 
 
 module.exports = router;

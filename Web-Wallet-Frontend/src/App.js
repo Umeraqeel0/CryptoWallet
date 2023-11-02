@@ -11,6 +11,8 @@ import Settings from "./components/Settings /Settings";
 import SendFinal from './components/Send/SendFinal';
 import Notifications from "./components/Notifications/Notifications";
 import Buy from './components/Buy/Buy';
+import PrivateAdd from './components/Buy/PrivateAdd';
+
 
 
 function App() {
@@ -31,7 +33,8 @@ function App() {
 
           <Route path="settings" element={<Settings />} />
           <Route path="notifications" element={<Notifications />} />
-
+          <Route path="privateAdd" element={<PrivateAdd />} />
+        
         </Routes>
       </Router>
     </div>

@@ -32,7 +32,9 @@ import lineaEth from "../../assets/lineaEth.png";
 import polygon from "../../assets/polygon.png";
 import { Switch } from "@mui/material";
 import { Spinner } from "react-bootstrap";
-import CircularProgress from "@mui/material/CircularProgress";
+import ReactLoading from "react-loading";
+
+
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -85,6 +87,8 @@ const Nav = (props) => {
   const [addForBal, setAddForBal] = useState([]);
   const [getBal, setBal] = useState([]);
   const [bal, isBal] = useState(false);
+  const [data, setData] = useState([]);
+  const [done, setDone] = useState(undefined);
 
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
@@ -111,6 +115,8 @@ const Nav = (props) => {
     console.log("accBalance", bal);
     setBal(bal);
     isBal(true);
+
+    setDone(true);
   };
 
   const addAccount = async () => {
@@ -402,80 +408,92 @@ const Nav = (props) => {
             </DialogContent>
           </Dialog>
         </Box>
+
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-          <div>
-            <Button
-              style={{ marginLeft: "-90px" }}
-              sx={{ bgcolor: "#282c34" }}
-              id='demo-customized-button'
-              aria-controls={open ? "demo-customized-menu" : undefined}
-              aria-haspopup='true'
-              aria-expanded={open ? "true" : undefined}
-              variant='contained'
-              disableElevation
-              onClick={handleOpenDialog}
-              endIcon={<KeyboardArrowDownIcon />}
-            >
-              <b>Accounts</b>
-            </Button>
+          <Button
+            style={{ marginLeft: "-90px" }}
+            sx={{ bgcolor: "#282c34" }}
+            id='demo-customized-button'
+            aria-controls={open ? "demo-customized-menu" : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? "true" : undefined}
+            variant='contained'
+            disableElevation
+            onClick={handleOpenDialog}
+            endIcon={<KeyboardArrowDownIcon />}
+          >
+            <b>Accounts</b>
+          </Button>
 
-            <Box>
-              <Dialog open={opened} onClose={handleCloseDialog} maxWidth='sm'>
-                <DialogContent sx={{ backgroundColor: "#282c34" }}>
-                  <div
+          <Box>
+            <Dialog open={opened} onClose={handleCloseDialog} maxWidth='sm'>
+              <DialogContent sx={{ backgroundColor: "#282c34" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <p style={{ color: "white" }}>Select an account</p>
+                  <button
+                    onClick={handleCloseDialog}
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
+                      background: "transparent",
+                      border: "none",
+                      cursor: "pointer",
                     }}
                   >
-                    <p style={{ color: "white" }}>Select an account</p>
-                    <button
-                      onClick={handleCloseDialog}
-                      style={{
-                        background: "transparent",
-                        border: "none",
-                        cursor: "pointer",
-                      }}
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='white'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='24'
-                        height='24'
-                        viewBox='0 0 24 24'
-                        fill='none'
-                        stroke='white'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                      >
-                        <line x1='18' y1='6' x2='6' y2='18' />
-                        <line x1='6' y1='6' x2='18' y2='18' />
-                      </svg>
-                    </button>
-                  </div>
+                      <line x1='18' y1='6' x2='6' y2='18' />
+                      <line x1='6' y1='6' x2='18' y2='18' />
+                    </svg>
+                  </button>
+                </div>
 
-                  <InputBase
-                    placeholder='Search accounts'
-                    inputProps={{ "aria-label": "search" }}
-                    sx={{
-                      color: "silver",
-                      border: "1px solid white",
-                      marginTop: "1px",
-                      width: "100%",
-                      borderRadius: "10px",
-                      height: "35px",
-                    }} // Changing the placeholder text color to silver
-                  />
+                <InputBase
+                  placeholder='Search accounts'
+                  inputProps={{ "aria-label": "search" }}
+                  sx={{
+                    color: "silver",
+                    border: "1px solid white",
+                    marginTop: "1px",
+                    width: "100%",
+                    borderRadius: "10px",
+                    height: "35px",
+                  }} // Changing the placeholder text color to silver
+                />
 
-                  <div
-                    style={{
-                      overflowY: "scroll",
-                      height: "150px",
-                      marginTop: "10px",
-                    }}
-                  >
-                    {addForBal.map((account, index) => (
+                <div
+                  style={{
+                    overflowY: "scroll",
+                    height: "150px",
+                    marginTop: "10px",
+                  }}
+                >
+                  {!bal ? (
+                    <>
+                    <div style={{marginLeft: "100px", marginTop: "50px"}}>
+                      <ReactLoading
+                        type={"bars"}
+                        color={"#1098fc"}
+                        height={70}
+                        width={70}
+                      />
+                      </div>
+                    </>
+                  ) : (
+                    addForBal.map((account, index) => (
                       <a
                         key={index}
                         onClick={handleValue}
@@ -508,13 +526,6 @@ const Nav = (props) => {
                               Account {index + 1}
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              {!bal && (
-                                <>
-                                <CircularProgress />
-                                
-                                 
-                                </>
-                              )}
                               {bal && <>{getBal[index].data.toFixed(5)} ETH </>}
                             </p>
                             <p style={{ marginTop: "-10px" }}>
@@ -527,7 +538,6 @@ const Nav = (props) => {
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-                                {!bal && <CircularProgress />}
                                 {bal && (
                                   <>{getBal[index].data.toFixed(5)} ETH </>
                                 )}
@@ -538,89 +548,86 @@ const Nav = (props) => {
                           </div>
                         </Box>
                       </a>
-                    ))}
-                  </div>
+                    ))
+                  )}
+                </div>
 
-                  <p
+                <p
+                  style={{
+                    marginTop: "40px",
+                  }}
+                >
+                  <span
                     style={{
-                      marginTop: "40px",
+                      color: "#1098fc",
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      borderBottom: "1px solid transparent",
+                      transition: "border-color 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderBottom = "1px solid #1098fc";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderBottom =
+                        "1px solid transparent";
+                    }}
+                    onClick={addAccount}
+                  >
+                    Add Account
+                  </span>
+                </p>
+
+                <p>
+                  <span
+                    style={{
+                      color: "#1098fc",
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      borderBottom: "1px solid transparent",
+                      transition: "border-color 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderBottom = "1px solid #1098fc";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderBottom =
+                        "1px solid transparent";
+                    }}
+                    onClick={() => {
+                      // Handle the click event here
                     }}
                   >
-                    <span
-                      style={{
-                        color: "#1098fc",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        borderBottom: "1px solid transparent",
-                        transition: "border-color 0.3s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderBottom =
-                          "1px solid #1098fc";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderBottom =
-                          "1px solid transparent";
-                      }}
-                      onClick={addAccount}
-                    >
-                      Add Account
-                    </span>
-                  </p>
+                    Import account
+                  </span>
+                </p>
 
-                  <p>
-                    <span
-                      style={{
-                        color: "#1098fc",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        borderBottom: "1px solid transparent",
-                        transition: "border-color 0.3s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderBottom =
-                          "1px solid #1098fc";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderBottom =
-                          "1px solid transparent";
-                      }}
-                      onClick={() => {
-                        // Handle the click event here
-                      }}
-                    >
-                      Import account
-                    </span>
-                  </p>
-
-                  <p>
-                    <span
-                      style={{
-                        color: "#1098fc",
-                        cursor: "pointer",
-                        textDecoration: "none",
-                        borderBottom: "1px solid transparent",
-                        transition: "border-color 0.3s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderBottom =
-                          "1px solid #1098fc";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderBottom =
-                          "1px solid transparent";
-                      }}
-                      onClick={() => {
-                        // Handle the click event here
-                      }}
-                    >
-                      Add Hardware Wallet
-                    </span>
-                  </p>
-                </DialogContent>
-              </Dialog>
-            </Box>
-          </div>
+                <p>
+                  <span
+                    style={{
+                      color: "#1098fc",
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      borderBottom: "1px solid transparent",
+                      transition: "border-color 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderBottom = "1px solid #1098fc";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderBottom =
+                        "1px solid transparent";
+                    }}
+                    onClick={() => {
+                      // Handle the click event here
+                    }}
+                  >
+                    Add Hardware Wallet
+                  </span>
+                </p>
+              </DialogContent>
+            </Dialog>
+          </Box>
         </Typography>
 
         <IconButton

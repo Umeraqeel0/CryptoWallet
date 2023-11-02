@@ -7,8 +7,6 @@ import DialogContent from "@mui/material/DialogContent";
 import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
 import round from "../../assets/round.png";
 import right from "../../assets/right.png";
 import userDetails from "../../services/userDetails";

@@ -42,6 +42,22 @@ const getUserAccount = async (req, res) => {
   }
 };
 
+const getUserAccountByAddress = async (req, res) => {
+  try {
+    const address = req.params.address;
+    console.log(address);
+    Addresses.findAll({
+      where: {
+        address: address,
+      },
+    }).then((users) => {
+      res.send(users);
+    });
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: error.message });
+  }
+};
+
 const updateBalance = async (req, res) => {
   try {
     const { balance } = req.body;
@@ -177,5 +193,6 @@ module.exports = {
   getAllUserTx,
   getUserTxById,
   getUserTxByAddress,
-  getUserTxByToAddress
+  getUserTxByToAddress,
+  getUserAccountByAddress
 };
