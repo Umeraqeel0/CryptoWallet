@@ -13,6 +13,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { useSelector } from "react-redux";
+import eth from "../../assets/eth.png";
 
 const SendDetails = (props) => {
   const bal = useSelector((state) => state.user.bal);
@@ -50,10 +51,10 @@ const SendDetails = (props) => {
           }}
         >
           <p>Send</p>
-          <div style={{ marginLeft: "3px", marginTop: "1px" }}>
-            <div class='account-div'>
-              <div className='account-main'>
-                <div>Account 2</div>
+          <div style={{ marginLeft: '3px', marginTop: '1px' }}> 
+          <div class='account-div'>
+            <div className='account-main'>
+              <div style={{color:"#1098fc"}}>Account 2</div>
                 <div class='ens-input__selected-input__subtitle'>
                   {props.value}
                 </div>
@@ -72,11 +73,11 @@ const SendDetails = (props) => {
               <div class='send-v2__form-label'>Asset:</div>
               <div class='asset-div'>
                 <div>
-                  <img
-                    src={round}
-                    alt='Image Description'
-                    style={{ width: "43px", height: "43px" }}
-                  />
+                <img
+                  src={eth}
+                  alt='Image Description'
+                  style={{ width: "33px", height: "33px",marginTop:"6px",marginLeft:"5px" }}
+                />
                 </div>
                 <div class='additional-container'>
                   <p class='label_heading'>Balance:{bal}</p>
@@ -134,33 +135,33 @@ const SendDetails = (props) => {
             </div>
 
             <Box
-              display='flex'
-              flexDirection='row'
-              justifyContent='space-between'
-              border='1px solid #ccc'
-              borderRadius='8px'
-              padding='12px'
-              width='470px' // Customize the width of the box
-              margin='20px auto' // Add space from top and center horizontally
-            >
-              <Box display='flex' flexDirection='column'>
-                <Typography variant='body1' style={textStyle}>
-                  {" "}
-                  Gas (estimated)
-                </Typography>
-                <Typography variant='body1' style={textStyle}>
-                  Likely in 30 seconds
-                </Typography>
-              </Box>
-              <Box display='flex' flexDirection='column'>
-                <Typography variant='body1' style={textStyle}>
-                  0.0000315 GoerliETH
-                </Typography>
-                <Typography variant='body1' style={textStyle}>
-                  Max fee: 0.0000315 GoerliETH
-                </Typography>
-              </Box>
+            display='flex'
+            flexDirection='row'
+            justifyContent='space-between'
+            border='1px solid #ccc'
+            borderRadius='8px'
+            padding='12px'
+            width='440px' // Customize the width of the box
+            margin='20px auto' // Add space from top and center horizontally
+          >
+            <Box display='flex' flexDirection='column'>
+              <Typography variant='body1' style={{color:"white"}}>
+                {" "}
+                Gas (estimated)
+              </Typography>
+              <Typography variant='body1' style={{color:"green"}}>
+                Likely in 30 seconds
+              </Typography>
             </Box>
+            <Box display='flex' flexDirection='column'>
+              <Typography variant='body1' style={{color:"white"}}>
+                0.0000315 Eth
+              </Typography>
+              <Typography variant='body1' style={{color:"white",fontSize: "13px"}}>
+                Max fee: 0.0000315 GoerliETH
+              </Typography>
+            </Box>
+          </Box>
 
             <Box
               display='flex'
@@ -174,10 +175,9 @@ const SendDetails = (props) => {
                 onClick={goToDashboard}
                 variant='contained'
                 style={{
-                  marginRight: "100px",
-                  width: "130px",
-                  color: "black",
-                  background: "silver",
+                  width: "180px",
+                  color: "#1098fc",
+                  background: "white",
                 }}
               >
                 Cancel
@@ -188,10 +188,10 @@ const SendDetails = (props) => {
                 onClick={goToSendFinal}
                 variant='contained'
                 style={{
-                  marginLeft: "0px",
-                  width: "130px",
-                  color: "black",
-                  background: "blue",
+                  marginLeft: "10px",
+                  width: "180px",
+                  color: "white",
+                  background: "#1098fc",
                 }}
               >
                 Next

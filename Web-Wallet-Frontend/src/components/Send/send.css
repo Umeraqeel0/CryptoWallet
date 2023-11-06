@@ -119,9 +119,9 @@ input__wrapper {
 }
 
 .bordered-div {
-  border: 1px solid rgb(207, 170, 170); /* Add a red border to the div */
+  border: 1px solid rgb(255, 252, 252); /* Add a red border to the div */
   padding: 6px 0px; /* Add padding to the div to create space inside */
-  width: 260px; /* Set a width for the div */
+  width: 200px; /* Set a width for the div */
   text-align: center; /* Center the text horizontally within the div */
   margin-left: 1px; /* Move the div 20px to the left */
   border-radius: 10px; /* Make the corners round */
@@ -133,11 +133,11 @@ input__wrapper {
 }
 
 .asset-div {
-  border: 1px solid rgb(207, 170, 170); /* Add a red border to the div */
-  padding: 6px 0px; /* Add padding to the div to create space inside */
-  width: 285px; /* Set a width for the div */
+  border: 1px solid rgb(249, 248, 248); /* Add a red border to the div */
+  padding: 5px 0px; /* Add padding to the div to create space inside */
+  width: 200px; /* Set a width for the div */
   text-align: center; /* Center the text horizontally within the div */
-  margin-left: 1px; /* Move the div 20px to the left */
+  margin-left: 25px; /* Move the div 20px to the left */
   border-radius: 10px; /* Make the corners round */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle black shadow */
   height:60px;
@@ -147,7 +147,7 @@ input__wrapper {
 }
 
 .label_heading {
-  font-size: 20px;
+  font-size: 15px;
   line-height: 17px;
 }
 
@@ -171,9 +171,9 @@ input__wrapper {
 }
 
 .account-div {
-  border: 1px solid rgb(146, 125, 125); /* Add a red border to the div */
+  border: 1px solid rgb(251, 249, 249); /* Add a red border to the div */
   padding: 9px 13px; /* Add padding to the div to create space inside */
-  width: 445px; /* Set a width for the div */
+  width: 440px; /* Set a width for the div */
   text-align: left; /* Center the text horizontally within the div */
   /* margin-left: 190px; */
   /* Move the div 20px to the left */
@@ -190,12 +190,12 @@ input__wrapper {
 }
 
 .ens-input__selected-input__subtitle {
-  font-size: 0.75rem;
+  font-size: 1 rem;
   font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
   line-height: 140%;
   font-style: normal;
   font-weight: normal;
-  color: rgb(120, 143, 207);
+  color: rgb(230, 232, 236);
   margin-top: 0.25rem;
 }
 
