@@ -84,7 +84,7 @@ const SendDetailsFinal = (props) => {
   const textStyle = {
     fontSize: "16px", // Customize font size
     fontWeight: "bold", // Make text bold
-    color: "gold", // Customize text color
+     // Customize text color
   };
 
   console.log(address, bal, props.value, props.addr);
@@ -140,6 +140,7 @@ const SendDetailsFinal = (props) => {
           </div>
 
           <Box
+          
             display='flex'
             flexDirection='row'
             justifyContent='space-between'
@@ -150,20 +151,20 @@ const SendDetailsFinal = (props) => {
             margin='20px auto' // Add space from top and center horizontally
           >
             <Box display='flex' flexDirection='column'>
-              <Typography variant='body1' style={textStyle}>
+            <Typography variant='body1' style={{ fontSize: '18px', color: 'white' }}>
                 {" "}
                 Gas (estimated)
               </Typography>
-              <Typography variant='body1' style={textStyle}>
+              <Typography variant='body1' style={{ fontSize: '14px', color: 'green' }}>
                 Likely in 30 seconds
               </Typography>
             </Box>
             <Box display='flex' flexDirection='column'>
-              <Typography variant='body1' style={textStyle}>
+              <Typography variant='body1' style={{ fontSize: '14px', color: 'white' }}>
                 0.0000315 GoerliETH
               </Typography>
-              <Typography variant='body1' style={textStyle}>
-                Max fee: 0.0000315 GoerliETH
+              <Typography variant='body1' style={{ fontSize: '14px', color: 'white' }}>
+                Max: 0.0000315 GoerliETH
               </Typography>
             </Box>
           </Box>
@@ -183,7 +184,7 @@ const SendDetailsFinal = (props) => {
                 {" "}
                 Total
               </Typography>
-              <Typography variant='body1' style={textStyle}>
+              <Typography variant='body1' style={{ fontSize: '14px', color: 'white' }}>
                 Amount + gas fee
               </Typography>
             </Box>
@@ -191,8 +192,8 @@ const SendDetailsFinal = (props) => {
               <Typography variant='body1' style={textStyle}>
                 0.0000315 GoerliETH
               </Typography>
-              <Typography variant='body1' style={textStyle}>
-                Max amount: 0.0000315 GoerliETH
+              <Typography variant='body1' style={{ fontSize: '14px', color: 'white' }}>
+                Max : 0.0000315 GoerliETH
               </Typography>
             </Box>
           </Box>
@@ -201,7 +202,7 @@ const SendDetailsFinal = (props) => {
             display='flex'
             justifyContent='center'
             alignItems='center'
-            marginTop='40px' // Add space from the top
+            marginTop='180px' // Add space from the top
           >
             {/* First Button */}
 
@@ -209,10 +210,10 @@ const SendDetailsFinal = (props) => {
               onClick={goToDashboard}
               variant='contained'
               style={{
-                marginRight: "100px",
-                width: "130px",
+                marginRight: "10px",
+                width: "230px",
                 color: "black",
-                background: "silver",
+                background: "white",
               }}
             >
               Reject
@@ -224,9 +225,9 @@ const SendDetailsFinal = (props) => {
               onClick={sendTx}
               style={{
                 marginLeft: "0px",
-                width: "130px",
+                width: "230px",
                 color: "black",
-                background: "blue",
+                background: "#1098fc",
               }}
             >
               Confirm
