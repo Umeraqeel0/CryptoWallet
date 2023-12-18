@@ -50,7 +50,10 @@ const Activity = () => {
     fetchData().catch(console.error);
   }, [isPopupOpen, id, address]);
 
+  const numDescending = [...isTx].sort((a, b) => b.id - a.id);
+  
   console.log("is", isTx);
+  console.log("numDescending",numDescending)
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -70,7 +73,7 @@ const Activity = () => {
       </Box>
 
       <div>
-        {isTx.map((tx, index) => (
+        {numDescending.map((tx, index) => (
           <Box
             sx={{
               display: "flex",
@@ -81,7 +84,7 @@ const Activity = () => {
             }}
             onClick={openPopup}
           >
-            <ArrowDownwardIcon />
+            <ArrowUpwardIcon />
             <div>
               <h3>
                 <b>{tx.from === address ? "Send" : "Received"}</b>
@@ -104,7 +107,7 @@ const Activity = () => {
         ))}
       </div>
       <div>
-        {isTx.map((tx, index) => (
+        {numDescending.map((tx, index) => (
           <Box
             sx={{
               display: "flex",
@@ -126,7 +129,7 @@ const Activity = () => {
             }}
             onClick={openPopup}
           >
-            <ArrowUpwardIcon />
+            <ArrowDownwardIcon />
             <div>
               <h3>
                 <b>Received</b>
