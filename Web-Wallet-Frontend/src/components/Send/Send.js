@@ -71,7 +71,7 @@ const Send = () => {
             <Box
               sx={{
                 bgcolor: "#282c34",
-                height: "100vh",
+                height: "140vh",
                 width: "50vh",
                 flexGrow: 1,
               }}

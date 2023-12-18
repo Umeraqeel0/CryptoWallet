@@ -14,6 +14,7 @@ import { QRCodeSVG } from "qrcode.react";
 import userDetails from "../../services/userDetails";
 import toast, { Toaster } from "react-hot-toast";
 import bcrypt  from "bcryptjs";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 export default function FormDialog() {
   const address = useSelector((state) => state.user.value);
@@ -168,7 +169,7 @@ export default function FormDialog() {
             >
               <QRCodeSVG value={address} size='256' />
             </Box>
-
+            <CopyToClipboard text={address}>
             <Button
               style={{
                 marginTop: "30px",
@@ -183,6 +184,7 @@ export default function FormDialog() {
               <PartiallyHiddenText text={address} visibleChars={10} />
               &nbsp;&nbsp; <FileCopyIcon />
             </Button>
+            </CopyToClipboard>
 
             <Box
               sx={{

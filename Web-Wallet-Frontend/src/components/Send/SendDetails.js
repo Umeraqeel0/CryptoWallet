@@ -14,6 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { useSelector } from "react-redux";
 import eth from "../../assets/eth.png";
+import toast, { Toaster } from "react-hot-toast";
 
 const SendDetails = (props) => {
   const bal = useSelector((state) => state.user.bal);
@@ -24,8 +25,14 @@ const SendDetails = (props) => {
   const navigate = useNavigate();
 
   const goToSendFinal = () => {
-    navigate("/sendFinal", { state: { balance: balance, address: props.value } });
-  };
+    if(balance <= 0){
+      toast.error("Insufficient Amount!", {
+        autoClose: 2000,
+      });
+    }else{
+      navigate("/sendFinal", {state: {balance: balance, address: props.value}});
+    }
+    };
   const goToDashboard = () => {
     // Use history.push to navigate to a specific route (e.g., '/component2')
     navigate("/dashboard");
@@ -42,6 +49,7 @@ const SendDetails = (props) => {
   return (
     <>
       <Container fixed>
+      <Toaster />
         <Box
           sx={{
             bgcolor: "#282c34",
@@ -77,14 +85,14 @@ const SendDetails = (props) => {
               <div class='send-v2__form-label'>Asset:</div>
               <div class='asset-div'>
                 <div>
-                  <img
-                    src={eth}
-                    alt='Image Description'
-                    style={{ width: "33px", height: "33px", marginTop: "6px", marginLeft: "5px" }}
-                  />
+                <img
+                  src={eth}
+                  alt='Image Description'
+                  style={{ width: "33px", height: "33px",marginTop:"6px",marginLeft:"0px" }}
+                />
                 </div>
                 <div class='additional-container'>
-                  <p class='label_heading'>Balance:{bal}</p>
+                  <p class='label_heading'>Balance:{(bal).toFixed(9)}</p>
                 </div>
               </div>
               <div></div> <div></div>

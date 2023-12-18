@@ -176,7 +176,7 @@ const Activity = () => {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p>Status</p>
             <p>
-              <a href='your-link-here' style={{ color: "blue" }}>
+              <a href='https://sepolia.etherscan.io/address/0x837B7b09d218Ae1268DF3Fbc8714D66fA2258a53' target="_blank" style={{ color: "blue" }}>
                 View on explorer
               </a>
             </p>

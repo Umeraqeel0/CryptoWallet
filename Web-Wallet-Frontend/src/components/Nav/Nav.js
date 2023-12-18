@@ -109,11 +109,11 @@ const Nav = (props) => {
     setOpen(true);
     const res = await UserDetails.getUserAccount(id);
     console.log(res.data);
-    setAddForBal(res.data);
-
+    
     const bal = await UserDetails.getUserBalanceByAddresses(res.data);
     console.log("accBalance", bal);
     setBal(bal);
+    setAddForBal(res.data);
     isBal(true);
 
     setDone(true);
@@ -526,7 +526,7 @@ const Nav = (props) => {
                               Account {index + 1}
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              {bal && <>{getBal[index].data.toFixed(5)} ETH </>}
+                              {bal && <>{getBal[index].data.toFixed(5)} ETH  </>}
                             </p>
                             <p style={{ marginTop: "-10px" }}>
                               <option value={account.address}>

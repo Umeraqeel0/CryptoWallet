@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 
 const Cart = (props) => {
@@ -49,7 +50,7 @@ const Cart = (props) => {
   return (
     <>
      <Box sx={{ bgcolor: '#282c34', marginTop: '0.1vh', height: '30vh', width: '121.5vh', flexGrow: 2 }}>
-      
+     <CopyToClipboard text={address}>
       <Button
         style={{ marginTop: "15px", background: "#1b1e22", color: "#1098fc" }}
         centered
@@ -59,6 +60,7 @@ const Cart = (props) => {
         <PartiallyHiddenText text={address} visibleChars={10} />
         &nbsp;&nbsp; <FileCopyIcon />
       </Button>
+     </CopyToClipboard>
       
       <h1 style={{ color: "white", marginLeft: "-20px" }}>{bal.toFixed(5)} ETH</h1>
       <h4 style={{ color: "#a8aaad", marginLeft: "-20px" }}>{(bal * 1553.07).toFixed(2)} USD</h4>
